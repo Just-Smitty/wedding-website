@@ -95,8 +95,11 @@ button, input, select { font: inherit; }
   /* Event / Travel inner + hero star rail (aligned width) */
   --content-rail: 840px;
 
-  /* Icon on dark surfaces (Figma icon / default on dark) */
+  /* Icon / default — use on light backgrounds (inherits on most of the page) */
+  --icon-default-on-light: var(--green-800);
+  /* Icon / default — on dark surfaces (nav, contrast bars, etc.) */
   --icon-default-on-dark: var(--green-300);
+  --icon-default: var(--icon-default-on-light);
 }
 
 /* ========================================
@@ -104,6 +107,7 @@ button, input, select { font: inherit; }
    ======================================== */
 .site-nav {
   background: var(--background-contrast-high);
+  --icon-default: var(--icon-default-on-dark);
   height: 100px;
   display: flex;
   align-items: center;
@@ -190,17 +194,53 @@ button, input, select { font: inherit; }
   display: flex;
 }
 
-/* Hamburger shows menu icon when closed, close icon when open (same control as desktop pattern) */
+/* One IconButton: menu and close share the same 18×18 slot; crossfade on open/close */
+.hamburger-icons {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.hamburger-icons img {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: block;
+  width: 18px;
+  height: 18px;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.hamburger .nav-menu-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
 .hamburger .nav-close-icon {
-  display: none;
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.85);
+  pointer-events: none;
 }
 
 .hamburger[aria-expanded="true"] .nav-menu-icon {
-  display: none;
+  opacity: 0;
+  transform: rotate(90deg) scale(0.85);
+  pointer-events: none;
 }
 
 .hamburger[aria-expanded="true"] .nav-close-icon {
-  display: block;
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hamburger-icons .nav-menu-icon,
+  .hamburger-icons .nav-close-icon {
+    transition: none !important;
+    transform: none !important;
+  }
 }
 
 .mobile-menu-links {
@@ -217,8 +257,7 @@ button, input, select { font: inherit; }
 
 .mobile-menu-links a {
   font-family: Optima, 'Trebuchet MS', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 400;
   letter-spacing: 0.01em;
   font-size: clamp(36px, 12vw, 48px);
   line-height: 1.08;
@@ -996,7 +1035,8 @@ button, input, select { font: inherit; }
     border-radius: 9999px;
     background: var(--background-button-primary-resting);
     border: 1px solid var(--background-button-primary-resting);
-    color: var(--text-contrast-medium);
+    /* SVG strokes use currentColor — theme token so nav icons read light on dark */
+    color: var(--icon-default);
     transition: opacity 0.2s, background 0.2s, border-color 0.2s;
   }
 
@@ -1015,12 +1055,7 @@ button, input, select { font: inherit; }
     outline-offset: 2px;
   }
 
-  .hamburger img {
-    display: block;
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-  }
+  /* Icon stack sizing lives on .hamburger-icons (single visual control) */
 
   /* Base font size */
   body {
