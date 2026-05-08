@@ -1203,19 +1203,37 @@ button, input, select { font: inherit; }
     padding: 40px 20px 80px;
   }
 
+  .travel-wrapper,
+  .travel-wrapper .travel-inner {
+    text-align: center;
+  }
+
   .travel-row,
   .favs-row {
     grid-template-columns: 1fr;
+  }
+
+  .travel-row > div,
+  .favs-category {
+    text-align: center;
   }
 
   /* Travel type now comes from type-* utilities */
 
   .hotel-row {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hotel-info {
+    min-width: 0;
+    width: 100%;
   }
 
   .hotel-buttons {
     width: 100%;
+    justify-content: center;
   }
 
   .hotel-buttons .btn {
