@@ -86,8 +86,8 @@ button, input, select { font: inherit; }
   --text-link-active: var(--green-300);
   --text-contrast-medium: var(--cream-200);
   --background-contrast-high: var(--green-900);
-  --background-button-secondary-resting: var(--green-800);
-  --border-button-secondary-resting: var(--green-800);
+  /* Primary fills (RSVP nav, primary CTAs, mobile menu IconButton) */
+  --background-button-primary-resting: var(--green-800);
 
   /* Star divider: wing lines (graphic color is per-asset SVG) */
   --star-rule-color: var(--green-300);
@@ -147,8 +147,8 @@ button, input, select { font: inherit; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--background-button-secondary-resting);
-  border: 1px solid var(--border-button-secondary-resting);
+  background: var(--background-button-primary-resting);
+  border: 1px solid var(--background-button-primary-resting);
   border-radius: 8px;
   height: 44px;
   padding: 0 16px;
@@ -190,49 +190,17 @@ button, input, select { font: inherit; }
   display: flex;
 }
 
-.mobile-menu-dismiss {
+/* Hamburger shows menu icon when closed, close icon when open (same control as desktop pattern) */
+.hamburger .nav-close-icon {
   display: none;
-  position: absolute;
-  top: max(16px, env(safe-area-inset-top, 0px));
-  right: max(24px, env(safe-area-inset-right, 0px));
-  z-index: 2;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 32px;
-  height: 32px;
-  padding: 7px;
-  border-radius: 9999px;
-  background: var(--background-button-secondary-resting);
-  border: 1px solid var(--border-button-secondary-resting);
-  color: var(--icon-default-on-dark);
-  cursor: pointer;
-  transition: opacity 0.2s, border-color 0.2s;
 }
 
-.mobile-menu-dismiss:hover {
-  opacity: 0.92;
-  border-color: var(--green-500);
+.hamburger[aria-expanded="true"] .nav-menu-icon {
+  display: none;
 }
 
-.mobile-menu-dismiss:active {
-  background: var(--green-900);
-  border-color: var(--green-500);
-}
-
-.mobile-menu-dismiss:focus-visible {
-  outline: 2px solid var(--green-300);
-  outline-offset: 2px;
-}
-
-.mobile-menu.open .mobile-menu-dismiss {
-  display: inline-flex;
-}
-
-.mobile-menu-dismiss img {
+.hamburger[aria-expanded="true"] .nav-close-icon {
   display: block;
-  width: 18px;
-  height: 18px;
 }
 
 .mobile-menu-links {
@@ -243,7 +211,7 @@ button, input, select { font: inherit; }
   flex: 1;
   gap: 12px;
   width: 100%;
-  padding: 72px 24px 40px;
+  padding: 40px 24px;
   box-sizing: border-box;
 }
 
@@ -252,7 +220,7 @@ button, input, select { font: inherit; }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.01em;
-  font-size: clamp(28px, 9vw, 48px);
+  font-size: clamp(36px, 12vw, 48px);
   line-height: 1.08;
   color: var(--text-link-resting);
   text-decoration: none;
@@ -387,7 +355,7 @@ button, input, select { font: inherit; }
 
 /* Primary — resting */
 .btn-primary {
-  background: var(--green-800);
+  background: var(--background-button-primary-resting);
   color: var(--cream-100);
 }
 
@@ -1006,23 +974,18 @@ button, input, select { font: inherit; }
     top: 64px;
     z-index: 101;
     flex-direction: column;
-    align-items: flex-end;
-  }
-
-  .mobile-menu-dismiss {
-    position: fixed;
-    top: max(16px, calc(env(safe-area-inset-top, 0px) + 16px));
-    right: max(24px, env(safe-area-inset-right, 0px));
-    z-index: 103;
+    align-items: stretch;
   }
 
   .mobile-menu-links {
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    text-align: right;
-    padding: 56px max(24px, env(safe-area-inset-right, 0px)) 40px max(24px, env(safe-area-inset-left, 0px));
+    text-align: center;
+    flex: 1;
+    padding: 24px max(24px, env(safe-area-inset-right, 0px)) max(40px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px));
     box-sizing: border-box;
     max-width: 100%;
+    min-height: calc(100dvh - 64px);
   }
 
   .hamburger {
@@ -1031,8 +994,8 @@ button, input, select { font: inherit; }
     height: 32px;
     padding: 7px;
     border-radius: 9999px;
-    background: var(--background-button-secondary-resting);
-    border: 1px solid var(--border-button-secondary-resting);
+    background: var(--background-button-primary-resting);
+    border: 1px solid var(--background-button-primary-resting);
     color: var(--text-contrast-medium);
     transition: opacity 0.2s, background 0.2s, border-color 0.2s;
   }

@@ -18,13 +18,11 @@
     </div>
     <a href="index.html#rsvp" class="nav-rsvp">RSVP</a>
     <button type="button" class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMenu()">
-      <img src="images/icon/menu-18-on-dark.svg" alt="" width="18" height="18">
+      <img class="nav-menu-icon" src="images/icon/menu-18-on-dark.svg" alt="" width="18" height="18">
+      <img class="nav-close-icon" src="images/icon/close-18.svg" alt="" width="18" height="18">
     </button>
   </nav>
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation">
-    <button type="button" class="mobile-menu-dismiss" aria-label="Close navigation menu" onclick="toggleMenu()">
-      <img src="images/icon/close-18.svg" alt="" width="18" height="18">
-    </button>
     <nav class="mobile-menu-links" aria-label="Main">
       <a href="index.html">Home</a>
       <a href="event.html">Event</a>
@@ -182,14 +180,20 @@
       menu.classList.toggle('open');
       var open = menu.classList.contains('open');
       document.body.style.overflow = open ? 'hidden' : '';
-      if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (btn) {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      }
     }
     document.querySelectorAll('.mobile-menu-links a').forEach(function(a) {
       a.addEventListener('click', function() {
         document.getElementById('mobileMenu').classList.remove('open');
         document.body.style.overflow = '';
         var btn = document.querySelector('.site-nav .hamburger');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (btn) {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', 'Open navigation menu');
+        }
       });
     });
     document.addEventListener('keydown', function(e) {
@@ -199,7 +203,10 @@
       menu.classList.remove('open');
       document.body.style.overflow = '';
       var btn = document.querySelector('.site-nav .hamburger');
-      if (btn) btn.setAttribute('aria-expanded', 'false');
+      if (btn) {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open navigation menu');
+      }
     });
   </script>
 
