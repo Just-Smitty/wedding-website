@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madison &amp; Ryan — Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ════════ NAVIGATION ════════ -->
+  <nav class="site-nav grain">
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="event.html">Event</a>
+      <a href="travel.html">Travel</a>
+      <a href="registry.html">Registry</a>
+    </div>
+    <a href="index.html#rsvp" class="nav-rsvp nav-rsvp-desktop">RSVP</a>
+    <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <img src="images/icon/menu-18.svg" alt="Menu" width="18" height="18">
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="active">Home</a>
+    <a href="event.html">Event</a>
+    <a href="travel.html">Travel</a>
+    <a href="registry.html">Registry</a>
+    <a href="index.html#rsvp" class="nav-rsvp">RSVP</a>
+  </div>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="hero grain">
+    <div class="hero-inner">
+
+      <!-- Star Divider -->
+      <div class="star-divider">
+        <span class="line"></span>
+        <img class="star-divider-mark" src="images/illustration/star.svg" alt="" width="77" height="24">
+        <span class="line"></span>
+      </div>
+
+      <p class="font-funk subheading">Holy Matrimony!</p>
+
+      <h1 class="script-name">Madison Forster</h1>
+
+      <div class="heart-icon">
+        <img src="images/illustration/heart.svg" alt="" width="30" height="27">
+      </div>
+
+      <h1 class="script-name">Ryan Smith</h1>
+    </div>
+  </section>
+
+  <!-- ════════ DETAILS ════════ -->
+  <section class="details-section grain grain-light">
+    <div class="details-grid">
+
+      <!-- Left -->
+      <div class="details-left">
+        <p class="details-address">
+          St. Sebastian Church<br>
+          2000 Marietta Dr<br>
+          Ft. Lauderdale
+        </p>
+        <p class="font-funk details-time" style="color:#ee533b; font-size:21px; margin-top:12px;">3pm</p>
+      </div>
+
+      <!-- Center -->
+      <div class="details-center">
+        <p class="font-funk details-date" style="color:#ee533b;">March 20, 2027</p>
+
+        <div class="photo-placeholder">
+          <img src="images/photos/photo-booth.jpg" alt="Madison Forster and Ryan Smith — photo booth" width="590" height="810" loading="lazy" decoding="async">
+        </div>
+
+        <!-- Decorative Cross/Flourish -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-top:12px;">
+          <path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="#00a651"/>
+        </svg>
+      </div>
+
+      <!-- Right -->
+      <div class="details-right">
+        <p class="details-address">
+          Reception to follow<br>
+          The Dalmar<br>
+          Ft. Lauderdale
+        </p>
+        <p class="font-funk details-time" style="color:#ee533b; font-size:21px; margin-top:12px;">5:30pm</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════ RSVP ════════ -->
+  <section class="rsvp-section grain grain-light" id="rsvp">
+    <div class="rsvp-card">
+      <h2 class="font-funk" style="color:#102d06;">RSVP</h2>
+
+      <form action="https://formspree.io/f/myklajbp" method="POST" id="rsvpForm" novalidate>
+
+        <div id="guestList">
+          <!-- Guest 1 (default) -->
+          <div class="guest-entry" data-guest="1">
+            <div class="form-group autocomplete-wrap">
+              <label>Guest 1 name</label>
+              <input type="text" name="guest1_name" autocomplete="off" placeholder="Start typing a name..." required>
+              <div class="autocomplete-dropdown"></div>
+              <p class="field-error"></p>
+            </div>
+            <div class="form-group">
+              <label>Entree option</label>
+              <select name="guest1_entree">
+                <option value="" disabled selected>Select entree</option>
+                <option value="beef">Beef</option>
+                <option value="chicken">Chicken</option>
+                <option value="fish">Fish</option>
+                <option value="vegetarian">Vegetarian</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-add-guest" id="btnAddGuest">
+          <img src="images/icon/add-18.svg" alt="" width="18" height="18">
+          Add guest
+        </button>
+
+        <button type="submit" class="btn-continue">Continue</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="site-footer">
+    <img class="footer-gators" src="images/illustration/gators.svg" alt="Dancing gators" width="164" height="158">
+  </footer>
+
+  <script>
+    /* ── Mobile menu ── */
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    document.querySelectorAll('.mobile-menu a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.getElementById('mobileMenu').classList.remove('open');
+      });
+    });
+
+    /* ── Guest list ── */
+    var GUESTS = [
+      "Cindy Smith","Scott Smith","Cassie Smith","Cassie Ford Smith","Jeremy Smith",
+      "Canon Smith","Owen Smith","Dustin Smith","Kali Smith","Kinsley Smith",
+      "Tracy Rubio","Jean Rubio","Jim Rubio","Sandi Rubio","Steve Smith",
+      "Keith Taylor","Mary Taylor","Kim Medrano","Frank Medrano","Kurt Taylor",
+      "Tammy Cardinal","Larry Cardinal","Ted Dailey","Natalie Dailey",
+      "Phil Bucci","Patty Bucci","Daniel Marthey","Dasha Marthey",
+      "Steven Cooper","Stephanie Cooper","Matt Skelly","Ashley Skelly",
+      "Joe Farkas","Kirstin Farkas","Chad Ricker","Jenny Fifer",
+      "Mathew Lafferty","Ugyen Lafferty","Clint Lafferty","Leanne Lafferty",
+      "Trevor Phillips","Jocelyn Phillips","Cory Lucero","Gabby Rivera",
+      "Charlie Casey","Craig Gephart","Rebecca Gephart","Andrew Rising",
+      "Abby Rising","Nick D'Amico","Jeanie Mordukhay","Nick Agin",
+      "Kyle Martin","Jaclyn Martin","Brent Casto","April Shilling",
+      "Ralph Cox","Karen Cox","Judy Sicker","Jim Sicker","Julie Rohr",
+      "Billy Rohr","Marnie Lekutanoy","Bilal Akkouche","Bronwyn Sawyer",
+      "Selina Hernández","Camille Pepicelli","Dominick Scarfogliero",
+      "Cindy Scarfogliero","Colleen Donahue","Juliette Mcnulty",
+      "Conor Mceneaney","Steven Walsh","Kim Walsh","David Walsh",
+      "Emily Smoke","Jacqueline Quinn","Gerard Quinn","Kate Prager",
+      "Peter Prager","Heather Sawyer","Kane Sawyer","Jackie Sullivan",
+      "Christine Forster","John Sawyer","Jim Hague","Paulette Vargas",
+      "Katia Lightfoot","Peter Lightfoot","Kit Ingeme","Katie Cimini",
+      "Carol Faria","Marie Walsh","Marykate Prager","Maryclare Mcveety",
+      "Paul Ryder","Mike Malenfant","Rich Hurley","Mikey Lightfoot",
+      "Montana Lightfoot","Natalia Reiss","Pasquale Tolemo","Stefani Butto",
+      "Robert Salaki","Santa Sitrno","Brian Kuck","Terry Kuck",
+      "Brian Kuck","Kaitlin Rapkiewicz","John Rapkiewicz"
+    ];
+
+    var guestCount = 1;
+    var selectedNames = new Set();
+
+    /* ── Autocomplete ── */
+    function setupAutocomplete(input) {
+      var dropdown = input.parentElement.querySelector('.autocomplete-dropdown');
+      var errorEl = input.parentElement.querySelector('.field-error');
+
+      input.addEventListener('input', function() {
+        var val = this.value.trim().toLowerCase();
+        errorEl.textContent = '';
+        input.classList.remove('invalid');
+        dropdown.innerHTML = '';
+
+        if (val.length < 1) { dropdown.style.display = 'none'; return; }
+
+        var matches = GUESTS.filter(function(name) {
+          return name.toLowerCase().indexOf(val) !== -1 && !selectedNames.has(name);
+        });
+
+        if (matches.length === 0) {
+          dropdown.style.display = 'none';
+          return;
+        }
+
+        matches.slice(0, 8).forEach(function(name) {
+          var item = document.createElement('div');
+          item.className = 'autocomplete-item';
+          var idx = name.toLowerCase().indexOf(val);
+          item.innerHTML = name.substring(0, idx)
+            + '<strong>' + name.substring(idx, idx + val.length) + '</strong>'
+            + name.substring(idx + val.length);
+          item.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            var prev = input.getAttribute('data-selected');
+            if (prev) selectedNames.delete(prev);
+            input.value = name;
+            input.setAttribute('data-selected', name);
+            selectedNames.add(name);
+            dropdown.style.display = 'none';
+            errorEl.textContent = '';
+            input.classList.remove('invalid');
+          });
+          dropdown.appendChild(item);
+        });
+        dropdown.style.display = 'block';
+      });
+
+      input.addEventListener('focus', function() {
+        if (this.value.trim().length >= 1) {
+          this.dispatchEvent(new Event('input'));
+        }
+      });
+
+      input.addEventListener('blur', function() {
+        var self = this;
+        setTimeout(function() {
+          dropdown.style.display = 'none';
+          validateField(self);
+        }, 150);
+      });
+    }
+
+    function validateField(input) {
+      var val = input.value.trim();
+      var errorEl = input.parentElement.querySelector('.field-error');
+      if (!val) {
+        input.classList.remove('invalid');
+        errorEl.textContent = '';
+        return false;
+      }
+      var match = GUESTS.find(function(name) {
+        return name.toLowerCase() === val.toLowerCase();
+      });
+      if (!match) {
+        input.classList.add('invalid');
+        errorEl.textContent = "Please select a name from the guest list";
+        return false;
+      }
+      if (input.getAttribute('data-selected') !== match) {
+        var prev = input.getAttribute('data-selected');
+        if (prev) selectedNames.delete(prev);
+        input.value = match;
+        input.setAttribute('data-selected', match);
+        selectedNames.add(match);
+      }
+      input.classList.remove('invalid');
+      errorEl.textContent = '';
+      return true;
+    }
+
+    /* ── Add guest ── */
+    document.getElementById('btnAddGuest').addEventListener('click', function() {
+      guestCount++;
+      var entry = document.createElement('div');
+      entry.className = 'guest-entry';
+      entry.setAttribute('data-guest', guestCount);
+      entry.innerHTML =
+        '<div class="guest-entry-header">' +
+          '<span class="guest-entry-label">Guest ' + guestCount + '</span>' +
+          '<button type="button" class="btn-remove-guest" title="Remove guest">&times;</button>' +
+        '</div>' +
+        '<div class="form-group autocomplete-wrap">' +
+          '<label>Name</label>' +
+          '<input type="text" name="guest' + guestCount + '_name" autocomplete="off" placeholder="Start typing a name...">' +
+          '<div class="autocomplete-dropdown"></div>' +
+          '<p class="field-error"></p>' +
+        '</div>' +
+        '<div class="form-group">' +
+          '<label>Entree option</label>' +
+          '<select name="guest' + guestCount + '_entree">' +
+            '<option value="" disabled selected>Select entree</option>' +
+            '<option value="beef">Beef</option>' +
+            '<option value="chicken">Chicken</option>' +
+            '<option value="fish">Fish</option>' +
+            '<option value="vegetarian">Vegetarian</option>' +
+          '</select>' +
+        '</div>';
+
+      document.getElementById('guestList').appendChild(entry);
+
+      var newInput = entry.querySelector('input[type="text"]');
+      setupAutocomplete(newInput);
+      newInput.focus();
+
+      entry.querySelector('.btn-remove-guest').addEventListener('click', function() {
+        var selName = newInput.getAttribute('data-selected');
+        if (selName) selectedNames.delete(selName);
+        entry.remove();
+        renumberGuests();
+      });
+    });
+
+    function renumberGuests() {
+      var entries = document.querySelectorAll('.guest-entry');
+      entries.forEach(function(entry, i) {
+        var num = i + 1;
+        entry.setAttribute('data-guest', num);
+        var label = entry.querySelector('.guest-entry-label');
+        if (label) label.textContent = 'Guest ' + num;
+        var nameLabel = entry.querySelector('.autocomplete-wrap label');
+        if (nameLabel) nameLabel.textContent = num === 1 ? 'Guest 1 name' : 'Name';
+        entry.querySelector('input[type="text"]').name = 'guest' + num + '_name';
+        entry.querySelector('select').name = 'guest' + num + '_entree';
+      });
+      guestCount = entries.length;
+    }
+
+    /* ── Form submit validation ── */
+    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+      var allValid = true;
+      var entries = this.querySelectorAll('.guest-entry');
+
+      entries.forEach(function(entry, i) {
+        var input = entry.querySelector('.autocomplete-wrap input[type="text"]');
+        var select = entry.querySelector('select');
+        var val = input.value.trim();
+
+        /* Name validation */
+        if (i === 0 && !val) {
+          input.classList.add('invalid');
+          input.parentElement.querySelector('.field-error').textContent = 'Please enter your name';
+          allValid = false;
+        } else if (val && !validateField(input)) {
+          allValid = false;
+        }
+
+        /* Entree validation — required if name is filled (always for guest 1) */
+        var namePresent = i === 0 || val;
+        if (namePresent && !select.value) {
+          select.classList.add('invalid');
+          var selectGroup = select.closest('.form-group');
+          var selectError = selectGroup.querySelector('.field-error');
+          if (!selectError) {
+            selectError = document.createElement('p');
+            selectError.className = 'field-error';
+            selectGroup.appendChild(selectError);
+          }
+          selectError.textContent = 'Please select an entree';
+          allValid = false;
+        } else {
+          select.classList.remove('invalid');
+          var selectGroup = select.closest('.form-group');
+          var selectError = selectGroup.querySelector('.field-error');
+          if (selectError) selectError.textContent = '';
+        }
+      });
+
+      if (!allValid) {
+        e.preventDefault();
+        var firstInvalid = this.querySelector('.invalid');
+        if (firstInvalid) firstInvalid.focus();
+      }
+    });
+
+    /* ── Select filled state ── */
+    function setupSelectState(select) {
+      select.addEventListener('change', function() {
+        this.classList.toggle('filled', this.value !== '');
+        /* Clear invalid state on selection */
+        if (this.value) {
+          this.classList.remove('invalid');
+          var err = this.closest('.form-group').querySelector('.field-error');
+          if (err) err.textContent = '';
+        }
+      });
+    }
+
+    document.querySelectorAll('.form-group select').forEach(setupSelectState);
+
+    /* Hook into addGuest to also setup new selects */
+    var origAddClick = document.getElementById('btnAddGuest').onclick;
+    var addBtn = document.getElementById('btnAddGuest');
+    addBtn.addEventListener('click', function() {
+      setTimeout(function() {
+        document.querySelectorAll('.form-group select:not(.select-ready)').forEach(function(sel) {
+          setupSelectState(sel);
+          sel.classList.add('select-ready');
+        });
+      }, 0);
+    });
+
+    /* ── Init autocomplete on first guest ── */
+    setupAutocomplete(document.querySelector('.guest-entry input[type="text"]'));
+  </script>
+
+</body>
+</html>

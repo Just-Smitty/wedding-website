@@ -1,0 +1,999 @@
+/* ========================================
+   Wedding Site — Shared Styles
+   ======================================== */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;700&family=Pinyon+Script&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.55;
+  color: #102d06;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button, input, select { font: inherit; }
+
+/* ── Typography Utilities ── */
+.font-script {
+  font-family: 'Pinyon Script', cursive;
+  font-weight: 400;
+}
+
+.font-funk {
+  font-family: Optima, 'Trebuchet MS', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: 21px;
+  line-height: 28px;
+}
+
+.font-serif {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+}
+
+/* ── Color Tokens ── */
+:root {
+  /* Cream */
+  --cream-100: #fffcf9;
+  --cream-og: #fefaf6;
+  --cream-200: #fef2e3;
+
+  /* Neutral */
+  --white: #ffffff;
+  --neutral-100: #fcfcfc;
+  --neutral-200: #e2e2e2;
+  --neutral-500: #a0a0a0;
+  --neutral-700: #6e6e6e;
+  --neutral-900: #1c1010;
+  --neutral-1000: #000000;
+
+  /* Rose */
+  --rose-200: #ffdede;
+  --rose-300: #ffb7b7;
+  --rose-500: #ee533b;
+  --rose-800: #3b2222;
+  --rose-900: #2a1919;
+
+  /* Green */
+  --green-200: #edfaef;
+  --green-300: #bdebc4;
+  --green-500: #00a651;
+  --green-800: #102d06;
+  --green-900: #0a2108;
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+.site-nav {
+  background: var(--green-900);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 80px 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-nav.grain {
+  position: sticky;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding-left: 80px;
+}
+
+.nav-links a {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--rose-300);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--green-300);
+}
+
+.nav-links a.active {
+  color: var(--green-300);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.nav-rsvp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--green-800);
+  border: 1px solid var(--green-800);
+  border-radius: 8px;
+  height: 44px;
+  padding: 0 16px;
+  color: var(--green-300);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.nav-rsvp:hover {
+  opacity: 0.85;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.hamburger img {
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+/* Mobile nav overlay */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--green-900);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 48px;
+  gap: 32px;
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+.mobile-menu a {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--rose-300);
+}
+
+.mobile-menu a.active {
+  color: var(--green-300);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.mobile-menu .nav-rsvp {
+  margin-top: 16px;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.site-footer {
+  background: var(--cream-100);
+  padding: 80px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-gators {
+  width: 164px;
+  height: 158px;
+}
+
+/* ========================================
+   STAR DIVIDER
+   ======================================== */
+.star-divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+}
+
+.star-divider .line {
+  flex: 1;
+  height: 1px;
+  background: var(--green-300);
+}
+
+.star-divider .star-divider-mark {
+  flex-shrink: 0;
+  width: 77px;
+  height: 24px;
+  display: block;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  border: none;
+  white-space: nowrap;
+}
+
+/* Secondary — resting */
+.btn-secondary {
+  background: var(--white);
+  border: 1px solid var(--green-300);
+  color: var(--green-800);
+}
+
+/* Secondary — hovered */
+.btn-secondary:hover {
+  background: var(--green-200);
+  border-color: var(--green-500);
+}
+
+/* Secondary — pressed */
+.btn-secondary:active {
+  background: var(--green-300);
+  border-color: var(--green-800);
+}
+
+/* Secondary — disabled */
+.btn-secondary:disabled {
+  background: var(--neutral-200);
+  border-color: var(--neutral-200);
+  color: var(--neutral-500);
+  cursor: default;
+}
+
+/* Primary — resting */
+.btn-primary {
+  background: var(--green-800);
+  color: var(--cream-100);
+}
+
+/* Primary — hovered */
+.btn-primary:hover {
+  background: var(--green-900);
+}
+
+/* Primary — pressed */
+.btn-primary:active {
+  background: var(--green-900);
+}
+
+/* Primary — disabled */
+.btn-primary:disabled {
+  background: var(--neutral-500);
+  color: var(--neutral-200);
+  cursor: default;
+}
+
+/* ========================================
+   FORM STYLES (RSVP)
+   ======================================== */
+.rsvp-section {
+  background: var(--white);
+  padding: 64px 40px;
+}
+
+.rsvp-card {
+  max-width: 560px;
+  min-width: 290px;
+  margin: 0 auto;
+  background: var(--cream-100);
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.16);
+  padding: 24px;
+}
+
+.rsvp-card h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  margin-bottom: 8px;
+}
+
+.form-group label {
+  display: block;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid var(--green-300);
+  border-radius: 8px;
+  padding: 0 16px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--neutral-700);
+  background: var(--cream-100);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.form-group select {
+  padding-left: 16px;
+  padding-right: 32px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23102d06' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px 8px;
+}
+
+/* Input — hovered */
+.form-group input:hover,
+.form-group select:hover {
+  border-color: var(--green-500);
+  color: var(--green-800);
+}
+
+/* Input — focused / selected */
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--green-800);
+  color: var(--green-800);
+  background: var(--cream-100);
+}
+
+/* Input — filled */
+.form-group input:not(:placeholder-shown) {
+  border-color: var(--green-800);
+  color: var(--green-800);
+  background: var(--cream-100);
+}
+
+.form-group select.filled {
+  border-color: var(--green-800);
+  color: var(--green-800);
+  background-color: var(--cream-100);
+}
+
+/* ── Autocomplete ── */
+.autocomplete-wrap {
+  position: relative;
+}
+
+.autocomplete-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border: 1px solid var(--green-300);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 50;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.autocomplete-item {
+  padding: 8px 16px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 16px;
+  color: var(--green-800);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.autocomplete-item:hover {
+  background: var(--green-200);
+}
+
+.autocomplete-item strong {
+  font-weight: 700;
+}
+
+/* ── Validation ── */
+.form-group input.invalid,
+.form-group select.invalid {
+  border-color: var(--rose-500);
+  background: var(--rose-200);
+}
+
+.field-error {
+  font-size: 12px;
+  color: var(--rose-500);
+  margin: 4px 0 0;
+  min-height: 0;
+}
+
+.field-error:empty {
+  display: none;
+}
+
+/* ── Guest entry ── */
+.guest-entry {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}
+
+.guest-entry + .guest-entry {
+  border-top: 1px solid var(--green-300);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+.guest-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.guest-entry-label {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--green-800);
+}
+
+.btn-remove-guest {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.btn-remove-guest:hover {
+  color: var(--rose-500);
+}
+
+.btn-add-guest {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 44px;
+  background: var(--white);
+  border: 1px solid var(--green-300);
+  border-radius: 8px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--green-800);
+  cursor: pointer;
+  justify-content: center;
+  margin-bottom: 8px;
+  transition: opacity 0.2s;
+}
+
+.btn-add-guest:hover { opacity: 0.85; }
+
+.btn-continue {
+  width: 100%;
+  height: 44px;
+  background: var(--green-800);
+  border: none;
+  border-radius: 8px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--cream-100);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-continue:hover { opacity: 0.85; }
+
+/* ========================================
+   FILM GRAIN TEXTURE
+   ======================================== */
+.grain {
+  position: relative;
+}
+
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.07'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  z-index: 0;
+}
+
+.grain > * {
+  position: relative;
+  z-index: 1;
+}
+
+.grain-light::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+/* ========================================
+   HOME — HERO
+   ======================================== */
+.hero {
+  background: var(--green-900);
+  padding: 64px 24px 80px;
+  text-align: center;
+}
+
+.hero-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.hero .subheading {
+  color: var(--rose-500);
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.hero .script-name {
+  font-family: 'Pinyon Script', cursive;
+  font-weight: 400;
+  font-size: 80px;
+  line-height: 1.1;
+  color: var(--rose-300);
+  margin: 0;
+}
+
+.hero .heart-icon {
+  display: inline-block;
+  margin: 0;
+}
+
+.hero .heart-icon img {
+  display: block;
+  width: 30px;
+  height: auto;
+}
+
+/* ========================================
+   HOME — DETAILS
+   ======================================== */
+.details-section {
+  background: var(--rose-200);
+  padding: 48px 80px;
+}
+
+.details-grid {
+  display: flex;
+  gap: 40px;
+  max-width: 1060px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+.details-left,
+.details-right {
+  width: 290px;
+  flex-shrink: 0;
+}
+
+.details-right {
+  text-align: right;
+}
+
+.details-center {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.details-address {
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--green-800);
+}
+
+.details-time {
+  margin-top: 8px;
+}
+
+.details-date {
+  color: var(--rose-500);
+  margin-bottom: 16px;
+}
+
+.photo-placeholder {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 400 / 536;
+  background: var(--green-300);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-800);
+  font-size: 18px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ========================================
+   EVENT PAGE
+   ======================================== */
+.event-wrapper {
+  background: var(--green-200);
+  padding: 64px 80px 120px;
+}
+
+.event-inner {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.event-date-heading {
+  color: var(--green-500);
+  margin: 24px 0 16px;
+}
+
+.event-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 1fr;
+  gap: 24px;
+  border-top: 1px solid var(--green-300);
+  padding: 12px 0 24px;
+}
+
+.event-time {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.event-name {
+  font-size: 18px;
+}
+
+.event-location,
+.event-notes {
+  font-size: 18px;
+}
+
+.church-illustration {
+  display: flex;
+  justify-content: center;
+  padding: 48px 0;
+}
+
+.church-illustration img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ========================================
+   TRAVEL PAGE
+   ======================================== */
+.travel-wrapper {
+  background: var(--cream-100);
+  padding: 64px 80px 120px;
+}
+
+.travel-inner {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.travel-section-heading {
+  color: var(--green-500);
+  margin: 24px 0 16px;
+}
+
+.travel-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  border-top: 1px solid var(--green-300);
+  padding: 12px 0 24px;
+}
+
+.travel-code {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.travel-name,
+.travel-detail {
+  font-size: 18px;
+}
+
+.hotel-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-top: 1px solid var(--green-300);
+  padding: 12px 0 24px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.hotel-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.hotel-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.hotel-address {
+  font-size: 14px;
+}
+
+.hotel-buttons {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.favs-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  border-top: 1px solid var(--green-300);
+  padding: 12px 0 24px;
+}
+
+.favs-category h4 {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.favs-category p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* ========================================
+   REGISTRY PAGE
+   ======================================== */
+.registry-wrapper {
+  background: var(--green-900);
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 64px 24px 80px;
+}
+
+.registry-wrapper .star-divider {
+  max-width: 400px;
+}
+
+.registry-wrapper .coming-soon {
+  font-family: 'Pinyon Script', cursive;
+  font-weight: 400;
+  font-size: 80px;
+  color: var(--rose-300);
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* ========================================
+   RESPONSIVE — MOBILE (<768px)
+   ======================================== */
+@media (max-width: 767px) {
+
+  /* Nav */
+  .site-nav {
+    height: 64px;
+    padding: 0 20px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-rsvp-desktop {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Base font size */
+  body {
+    font-size: 16px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 40px 20px 60px;
+  }
+
+  .hero .script-name {
+    font-size: 42px;
+  }
+
+  .hero .subheading {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Details */
+  .details-section {
+    padding: 32px 20px;
+  }
+
+  .details-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .details-grid > * {
+    order: 2;
+    width: 100%;
+    text-align: center;
+  }
+
+  .details-center { order: 1; }
+  .details-left   { order: 2; }
+  .details-right  { order: 3; text-align: center; }
+
+  .details-address {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .details-date,
+  .details-time {
+    font-size: 16px !important;
+  }
+
+  /* RSVP */
+  .rsvp-section {
+    padding: 40px 16px;
+  }
+
+  /* Event */
+  .event-wrapper {
+    padding: 40px 20px 80px;
+  }
+
+  .event-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .event-date-heading {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .event-name,
+  .event-location,
+  .event-notes {
+    font-size: 16px;
+  }
+
+  .event-time {
+    font-size: 12px;
+  }
+
+  /* Travel */
+  .travel-wrapper {
+    padding: 40px 20px 80px;
+  }
+
+  .travel-row,
+  .favs-row {
+    grid-template-columns: 1fr;
+  }
+
+  .travel-section-heading {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .travel-name,
+  .travel-detail {
+    font-size: 16px;
+  }
+
+  .travel-code,
+  .hotel-name {
+    font-size: 12px;
+  }
+
+  .hotel-address {
+    font-size: 14px;
+  }
+
+  .favs-category h4 {
+    font-size: 12px;
+  }
+
+  .favs-category p {
+    font-size: 16px;
+  }
+
+  .hotel-row {
+    flex-direction: column;
+  }
+
+  .hotel-buttons {
+    width: 100%;
+  }
+
+  .hotel-buttons .btn {
+    flex: 1;
+  }
+
+  /* Registry */
+  .registry-wrapper {
+    min-height: calc(100vh - 64px);
+  }
+
+  .registry-wrapper .coming-soon {
+    font-size: 42px;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding: 48px 24px;
+  }
+}
