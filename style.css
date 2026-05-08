@@ -21,7 +21,7 @@ body {
   font-weight: 500;
   font-size: 18px;
   line-height: 1.55;
-  color: #102d06;
+  color: var(--text-subhead);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -79,13 +79,25 @@ button, input, select { font: inherit; }
   --green-500: #00a651;
   --green-800: #102d06;
   --green-900: #0a2108;
+
+  /* ── Semantic (Figma Wedding-2027) ── */
+  --text-subhead: var(--green-800);
+  --text-link-resting: var(--rose-300);
+  --text-link-active: var(--green-300);
+  --text-contrast-medium: var(--cream-200);
+  --background-contrast-high: var(--green-900);
+  --background-button-secondary-resting: var(--green-800);
+  --border-button-secondary-resting: var(--green-800);
+
+  /* Star divider: wing lines (graphic color is per-asset SVG) */
+  --star-rule-color: var(--green-300);
 }
 
 /* ========================================
    NAVIGATION
    ======================================== */
 .site-nav {
-  background: var(--green-900);
+  background: var(--background-contrast-high);
   height: 100px;
   display: flex;
   align-items: center;
@@ -111,16 +123,16 @@ button, input, select { font: inherit; }
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 500;
   font-size: 16px;
-  color: var(--rose-300);
+  color: var(--text-link-resting);
   transition: color 0.2s;
 }
 
 .nav-links a:hover {
-  color: var(--green-300);
+  color: var(--text-link-active);
 }
 
 .nav-links a.active {
-  color: var(--green-300);
+  color: var(--text-link-active);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -129,12 +141,12 @@ button, input, select { font: inherit; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--green-800);
-  border: 1px solid var(--green-800);
+  background: var(--background-button-secondary-resting);
+  border: 1px solid var(--border-button-secondary-resting);
   border-radius: 8px;
   height: 44px;
   padding: 0 16px;
-  color: var(--green-300);
+  color: var(--text-contrast-medium);
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 500;
   font-size: 16px;
@@ -171,7 +183,7 @@ button, input, select { font: inherit; }
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--green-900);
+  background: var(--background-contrast-high);
   z-index: 99;
   flex-direction: column;
   align-items: center;
@@ -188,11 +200,11 @@ button, input, select { font: inherit; }
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 500;
   font-size: 20px;
-  color: var(--rose-300);
+  color: var(--text-link-resting);
 }
 
 .mobile-menu a.active {
-  color: var(--green-300);
+  color: var(--text-link-active);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -225,12 +237,25 @@ button, input, select { font: inherit; }
   align-items: center;
   width: 100%;
   gap: 0;
+  --star-rule-color: var(--green-300);
 }
 
 .star-divider .line {
   flex: 1;
   height: 1px;
-  background: var(--green-300);
+  background: var(--star-rule-color);
+}
+
+.hero .star-divider {
+  --star-rule-color: var(--green-300);
+}
+
+.travel-wrapper .star-divider {
+  --star-rule-color: var(--green-500);
+}
+
+.event-wrapper .star-divider {
+  --star-rule-color: var(--green-500);
 }
 
 .star-divider .star-divider-mark {
@@ -238,6 +263,10 @@ button, input, select { font: inherit; }
   width: 77px;
   height: 24px;
   display: block;
+}
+
+.star-divider--spaced {
+  margin-top: 48px;
 }
 
 /* ========================================
@@ -341,7 +370,7 @@ button, input, select { font: inherit; }
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 500;
   font-size: 12px;
-  color: #000;
+  color: var(--neutral-1000);
   margin-bottom: 4px;
 }
 
@@ -365,7 +394,7 @@ button, input, select { font: inherit; }
   padding-left: 16px;
   padding-right: 32px;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23102d06' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23102d06' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); /* green-800 */
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 12px 8px;
@@ -485,7 +514,7 @@ button, input, select { font: inherit; }
   background: none;
   border: none;
   font-size: 20px;
-  color: #999;
+  color: var(--neutral-500);
   cursor: pointer;
   padding: 0 4px;
   line-height: 1;
@@ -563,7 +592,7 @@ button, input, select { font: inherit; }
    HOME — HERO
    ======================================== */
 .hero {
-  background: var(--green-900);
+  background: var(--background-contrast-high);
   padding: 64px 24px 80px;
   text-align: center;
 }
@@ -669,8 +698,26 @@ button, input, select { font: inherit; }
   object-fit: cover;
 }
 
+.details-flourish {
+  margin-top: 12px;
+  color: var(--green-500);
+}
+
+.details-date-accent {
+  color: var(--rose-500);
+}
+
+.details-time-accent {
+  margin-top: 12px;
+  color: var(--rose-500);
+}
+
+.rsvp-heading {
+  color: var(--text-subhead);
+}
+
 /* ========================================
-   EVENT PAGE
+   EVENT PAGE (Figma event/desktop-v2)
    ======================================== */
 .event-wrapper {
   background: var(--green-200);
@@ -678,41 +725,72 @@ button, input, select { font: inherit; }
 }
 
 .event-inner {
-  max-width: 1060px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  max-width: 620px;
   margin: 0 auto;
 }
 
-.event-date-heading {
-  color: var(--green-500);
-  margin: 24px 0 16px;
-}
-
-.event-row {
-  display: grid;
-  grid-template-columns: 180px 1fr 1fr;
+.event-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   gap: 24px;
-  border-top: 1px solid var(--green-300);
-  padding: 12px 0 24px;
 }
 
-.event-time {
+.event-date-heading {
+  margin: 0;
+  font-family: Optima, 'Trebuchet MS', sans-serif;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: 21px;
+  line-height: 28px;
+  text-align: center;
+  color: var(--green-500);
+}
+
+.event-row-figma {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  border-top: 1px solid var(--green-300);
+  padding-top: 12px;
+  font-family: 'EB Garamond', Georgia, serif;
   font-size: 14px;
+  line-height: 20px;
+  color: var(--text-subhead);
 }
 
-.event-name {
-  font-size: 18px;
+.event-row-figma-time {
+  font-weight: 700;
+  text-align: right;
+  margin: 0;
 }
 
-.event-location,
-.event-notes {
-  font-size: 18px;
+.event-row-figma-detail {
+  font-weight: 500;
+  margin: 0;
+}
+
+.event-row-figma-detail-lines p {
+  margin: 0;
+  line-height: 20px;
+}
+
+.event-row-figma-aside {
+  margin-top: 8px;
+  font-style: italic;
 }
 
 .church-illustration {
   display: flex;
   justify-content: center;
-  padding: 48px 0;
+  padding: 0;
 }
 
 .church-illustration img {
@@ -810,7 +888,7 @@ button, input, select { font: inherit; }
    REGISTRY PAGE
    ======================================== */
 .registry-wrapper {
-  background: var(--green-900);
+  background: var(--background-contrast-high);
   min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
@@ -821,6 +899,7 @@ button, input, select { font: inherit; }
 
 .registry-wrapper .star-divider {
   max-width: 400px;
+  --star-rule-color: var(--green-300);
 }
 
 .registry-wrapper .coming-soon {
@@ -914,24 +993,22 @@ button, input, select { font: inherit; }
     padding: 40px 20px 80px;
   }
 
-  .event-row {
+  .event-inner {
+    gap: 48px;
+  }
+
+  .event-row-figma {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .event-row-figma-time {
+    text-align: left;
   }
 
   .event-date-heading {
     font-size: 16px;
     line-height: 24px;
-  }
-
-  .event-name,
-  .event-location,
-  .event-notes {
-    font-size: 16px;
-  }
-
-  .event-time {
-    font-size: 12px;
   }
 
   /* Travel */
