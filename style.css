@@ -136,6 +136,34 @@ button, input, select { font: inherit; }
   /* Icon / default — on dark surfaces (nav, contrast bars, etc.) */
   --icon-default-on-dark: var(--green-300);
   --icon-default: var(--icon-default-on-light);
+
+  /* Motion (quiet luxury) */
+  --motion-fast: 140ms;
+  --motion-standard: 200ms;
+  --motion-enter: 260ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--motion-enter) var(--ease-standard), transform var(--motion-enter) var(--ease-standard);
+  will-change: opacity, transform;
+}
+
+.reveal.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* ========================================
@@ -224,10 +252,24 @@ button, input, select { font: inherit; }
   flex-direction: column;
   align-items: stretch;
   padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity var(--motion-enter) var(--ease-emphasis), transform var(--motion-enter) var(--ease-emphasis);
 }
 
 .mobile-menu.open {
   display: flex;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu {
+    transform: none;
+    transition: none;
+  }
 }
 
 /* One IconButton: menu and close share the same 18×18 slot; crossfade on open/close */

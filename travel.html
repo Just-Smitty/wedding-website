@@ -182,6 +182,26 @@
   </footer>
 
   <script>
+    function initReveals() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var targets = Array.prototype.slice.call(document.querySelectorAll(
+        '.star-divider, .travel-section-heading, .travel-row, .hotel-row, .favs-row'
+      ));
+      if (!targets.length) return;
+
+      targets.forEach(function(el) { el.classList.add('reveal'); });
+
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('reveal-in');
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+
+      targets.forEach(function(el) { io.observe(el); });
+    }
+
     function toggleMenu() {
       var menu = document.getElementById('mobileMenu');
       var btn = document.querySelector('.site-nav .hamburger');
@@ -216,6 +236,8 @@
         btn.setAttribute('aria-label', 'Open navigation menu');
       }
     });
+
+    initReveals();
   </script>
 
 </body>
