@@ -683,13 +683,17 @@ button, input, select { font: inherit; }
   color: var(--rose-500);
   margin-top: 24px;
   margin-bottom: 24px;
+  /* Figma website/desktop Subhead: 21/24, tracking 1 */
+  font-size: 21px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
 }
 
 .hero .script-name {
   font-family: 'Pinyon Script', cursive;
   font-weight: 400;
   font-size: 80px;
-  line-height: 1.1;
+  line-height: 100px;
   color: var(--rose-300);
   margin: 0;
 }
@@ -740,7 +744,8 @@ button, input, select { font: inherit; }
 }
 
 .details-address {
-  font-size: 24px;
+  /* Figma website/desktop P1: 21/32 */
+  font-size: 21px;
   line-height: 32px;
   color: var(--green-800);
 }
@@ -752,6 +757,10 @@ button, input, select { font: inherit; }
 .details-date {
   color: var(--rose-500);
   margin-bottom: 16px;
+  /* Figma website/desktop Subhead: 21/24, tracking 1 */
+  font-size: 21px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
 }
 
 .photo-placeholder {
@@ -804,12 +813,20 @@ button, input, select { font: inherit; }
   padding: 64px 80px 120px;
 }
 
+.event-wrapper .travel-section-heading {
+  /* Figma website/desktop Subhead: 21/24, tracking 1 */
+  font-size: 21px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
 .event-schedule-slot-time {
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;
-  color: var(--text-subhead);
+  color: var(--neutral-900);
   margin: 0;
 }
 
@@ -825,7 +842,7 @@ button, input, select { font: inherit; }
 .event-schedule-cell {
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
   color: var(--text-subhead);
   margin: 0;
@@ -865,9 +882,18 @@ button, input, select { font: inherit; }
   text-align: center;
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
   color: var(--text-subhead);
+}
+
+.event-extra-block strong {
+  display: block;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--neutral-900);
+  margin-bottom: 0;
 }
 
 .event-extra-block p {
@@ -893,6 +919,11 @@ button, input, select { font: inherit; }
   margin: 24px 0 16px;
   text-align: center;
   width: 100%;
+  /* Figma website/desktop Subhead: 21/24, tracking 1, mixed case */
+  font-size: 21px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  text-transform: none;
 }
 
 .travel-row {
@@ -905,12 +936,16 @@ button, input, select { font: inherit; }
 
 .travel-code {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--neutral-900);
 }
 
 .travel-name,
 .travel-detail {
-  font-size: 18px;
+  /* Figma website/desktop P2: 16/24 */
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .hotel-row {
@@ -930,11 +965,18 @@ button, input, select { font: inherit; }
 
 .hotel-name {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--neutral-900);
 }
 
 .hotel-address {
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.hotel-info .hotel-address:last-child {
+  font-weight: 700;
 }
 
 .hotel-buttons {
@@ -955,13 +997,15 @@ button, input, select { font: inherit; }
 
 .favs-category h4 {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--neutral-900);
   margin-bottom: 4px;
 }
 
 .favs-category p {
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 /* ========================================
@@ -1068,12 +1112,16 @@ button, input, select { font: inherit; }
   }
 
   .hero .script-name {
-    font-size: 42px;
+    /* Figma website/mobile Title: 48/56 */
+    font-size: 48px;
+    line-height: 56px;
   }
 
   .hero .subheading {
-    font-size: 16px;
+    /* Figma website/mobile Subhead: 18/24, tracking 1 */
+    font-size: 18px;
     line-height: 24px;
+    letter-spacing: 0.01em;
   }
 
   /* Details */
@@ -1097,13 +1145,16 @@ button, input, select { font: inherit; }
   .details-right  { order: 3; text-align: center; }
 
   .details-address {
-    font-size: 18px;
+    /* Figma website/mobile P1: 19/28 */
+    font-size: 19px;
     line-height: 28px;
   }
 
   .details-date,
   .details-time {
-    font-size: 16px !important;
+    font-size: 18px !important;
+    line-height: 24px;
+    letter-spacing: 0.01em;
   }
 
   /* RSVP */
@@ -1116,6 +1167,12 @@ button, input, select { font: inherit; }
     padding: 40px 20px 80px;
   }
 
+  .event-wrapper .travel-section-heading {
+    /* Figma website/mobile Subhead: 18/24, tracking 1 */
+    font-size: 18px;
+    line-height: 24px;
+  }
+
   .church-illustration {
     margin-top: 32px;
   }
@@ -1124,12 +1181,32 @@ button, input, select { font: inherit; }
     margin-top: 32px;
   }
 
+  /* Mobile: more space between schedule boxes */
+  .event-wrapper .travel-row {
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+  }
+
+  .event-wrapper .travel-row:last-of-type {
+    margin-bottom: 0;
+  }
+
   .event-schedule-slot-time,
   .event-schedule-slot-title,
   .event-schedule-cell,
   .event-extra-block {
+    /* Figma website/mobile P3: 14/21 */
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .event-schedule-slot-time {
     font-size: 16px;
-    line-height: 22px;
+  }
+
+  .event-extra-block strong {
+    font-size: 16px;
+    line-height: 21px;
   }
 
   /* Event schedule: single column — centered; venue + address lines flush */
@@ -1164,30 +1241,37 @@ button, input, select { font: inherit; }
   }
 
   .travel-section-heading {
-    font-size: 16px;
+    /* Figma website/mobile Subhead: 18/24, tracking 1, mixed case */
+    font-size: 18px;
     line-height: 24px;
   }
 
   .travel-name,
   .travel-detail {
-    font-size: 16px;
+    /* Figma website/mobile P3: 14/21 */
+    font-size: 14px;
+    line-height: 21px;
   }
 
   .travel-code,
   .hotel-name {
-    font-size: 12px;
+    font-size: 16px;
+    line-height: 21px;
   }
 
   .hotel-address {
     font-size: 14px;
+    line-height: 21px;
   }
 
   .favs-category h4 {
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 21px;
   }
 
   .favs-category p {
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 21px;
   }
 
   .hotel-row {
