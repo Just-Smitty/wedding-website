@@ -984,8 +984,11 @@ button, input, select { font: inherit; }
 }
 
 .registry-wrapper .star-divider {
-  max-width: 400px;
-  --star-rule-color: var(--green-300);
+  max-width: var(--content-rail);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  --star-rule-color: var(--green-500);
 }
 
 .registry-wrapper .coming-soon {
