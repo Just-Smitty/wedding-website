@@ -717,79 +717,44 @@ button, input, select { font: inherit; }
 }
 
 /* ========================================
-   EVENT PAGE (Figma event/desktop-v2)
+   EVENT PAGE (aligned with Travel layout + Figma)
    ======================================== */
 .event-wrapper {
   background: var(--green-200);
   padding: 64px 80px 120px;
 }
 
-.event-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 64px;
-  max-width: 620px;
-  margin: 0 auto;
-}
-
-.event-panel {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 24px;
-}
-
-.event-date-heading {
-  margin: 0;
-  font-family: Optima, 'Trebuchet MS', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  font-size: 21px;
-  line-height: 28px;
-  text-align: center;
-  color: var(--green-500);
-}
-
-.event-row-figma {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
-  border-top: 1px solid var(--green-300);
-  padding-top: 12px;
+.event-schedule-slot-time {
   font-family: 'EB Garamond', Georgia, serif;
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--text-subhead);
-}
-
-.event-row-figma-time {
   font-weight: 700;
-  text-align: right;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--text-subhead);
   margin: 0;
 }
 
-.event-row-figma-detail {
+.event-schedule-slot-title {
+  font-family: 'EB Garamond', Georgia, serif;
   font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--text-subhead);
   margin: 0;
 }
 
-.event-row-figma-detail-lines p {
+.event-schedule-cell {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--text-subhead);
   margin: 0;
-  line-height: 20px;
-}
-
-.event-row-figma-aside {
-  margin-top: 8px;
-  font-style: italic;
 }
 
 .church-illustration {
   display: flex;
   justify-content: center;
+  margin-top: 48px;
   padding: 0;
 }
 
@@ -797,6 +762,38 @@ button, input, select { font: inherit; }
   max-width: 100%;
   height: auto;
 }
+
+.church-illustration--compact img {
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Dress code & notes: no star, centered, dividers only */
+.event-extra {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  margin-top: 48px;
+}
+
+.event-extra-block {
+  border-top: 1px solid var(--green-300);
+  padding-top: 12px;
+  text-align: center;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--text-subhead);
+}
+
+.event-extra-block p {
+  margin: 0;
+}
+
 
 /* ========================================
    TRAVEL PAGE
@@ -814,6 +811,8 @@ button, input, select { font: inherit; }
 .travel-section-heading {
   color: var(--green-500);
   margin: 24px 0 16px;
+  text-align: center;
+  width: 100%;
 }
 
 .travel-row {
@@ -860,9 +859,10 @@ button, input, select { font: inherit; }
 
 .hotel-buttons {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex-shrink: 0;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .favs-row {
@@ -993,22 +993,20 @@ button, input, select { font: inherit; }
     padding: 40px 20px 80px;
   }
 
-  .event-inner {
-    gap: 48px;
+  .church-illustration {
+    margin-top: 32px;
   }
 
-  .event-row-figma {
-    grid-template-columns: 1fr;
-    gap: 8px;
+  .event-extra {
+    margin-top: 32px;
   }
 
-  .event-row-figma-time {
-    text-align: left;
-  }
-
-  .event-date-heading {
+  .event-schedule-slot-time,
+  .event-schedule-slot-title,
+  .event-schedule-cell,
+  .event-extra-block {
     font-size: 16px;
-    line-height: 24px;
+    line-height: 22px;
   }
 
   /* Travel */
