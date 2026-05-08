@@ -16,17 +16,22 @@
       <a href="travel.html">Travel</a>
       <a href="registry.html">Registry</a>
     </div>
-    <a href="index.html#rsvp" class="nav-rsvp nav-rsvp-desktop">RSVP</a>
-    <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
-      <img src="images/icon/menu-18.svg" alt="Menu" width="18" height="18">
+    <a href="index.html#rsvp" class="nav-rsvp">RSVP</a>
+    <button type="button" class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMenu()">
+      <img src="images/icon/menu-18-on-dark.svg" alt="" width="18" height="18">
     </button>
   </nav>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" class="active">Home</a>
-    <a href="event.html">Event</a>
-    <a href="travel.html">Travel</a>
-    <a href="registry.html">Registry</a>
-    <a href="index.html#rsvp" class="nav-rsvp">RSVP</a>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation">
+    <button type="button" class="mobile-menu-dismiss" aria-label="Close navigation menu" onclick="toggleMenu()">
+      <img src="images/icon/close-18.svg" alt="" width="18" height="18">
+    </button>
+    <nav class="mobile-menu-links" aria-label="Main">
+      <a href="index.html" class="active">Home</a>
+      <a href="event.html">Event</a>
+      <a href="travel.html">Travel</a>
+      <a href="registry.html">Registry</a>
+      <a href="index.html#rsvp">RSVP</a>
+    </nav>
   </div>
 
   <!-- ════════ HERO ════════ -->
@@ -74,10 +79,7 @@
           <img src="images/photos/photo-booth.jpg" alt="Madison Forster and Ryan Smith — photo booth" width="590" height="810" loading="lazy" decoding="async">
         </div>
 
-        <!-- Decorative Cross/Flourish -->
-        <svg class="details-flourish" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/>
-        </svg>
+        <img class="details-palm" src="images/illustration/palm.svg" alt="" width="58" height="120" loading="lazy" decoding="async">
       </div>
 
       <!-- Right -->
@@ -140,12 +142,29 @@
   <script>
     /* ── Mobile menu ── */
     function toggleMenu() {
-      document.getElementById('mobileMenu').classList.toggle('open');
+      var menu = document.getElementById('mobileMenu');
+      var btn = document.querySelector('.site-nav .hamburger');
+      menu.classList.toggle('open');
+      var open = menu.classList.contains('open');
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
-    document.querySelectorAll('.mobile-menu a').forEach(function(a) {
+    document.querySelectorAll('.mobile-menu-links a').forEach(function(a) {
       a.addEventListener('click', function() {
         document.getElementById('mobileMenu').classList.remove('open');
+        document.body.style.overflow = '';
+        var btn = document.querySelector('.site-nav .hamburger');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
       });
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key !== 'Escape') return;
+      var menu = document.getElementById('mobileMenu');
+      if (!menu || !menu.classList.contains('open')) return;
+      menu.classList.remove('open');
+      document.body.style.overflow = '';
+      var btn = document.querySelector('.site-nav .hamburger');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
     });
 
     /* ── Guest list ── */
