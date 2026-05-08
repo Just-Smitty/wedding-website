@@ -103,9 +103,9 @@ button, input, select { font: inherit; }
   --neutral-1000: #000000;
 
   /* Rose */
-  --rose-200: #ffdede;
+  --rose-200: #f6e6e4;
   --rose-300: #ffb7b7;
-  --rose-500: #ee533b;
+  --rose-500: #ef563e;
   --rose-800: #3b2222;
   --rose-900: #2a1919;
 
@@ -113,8 +113,8 @@ button, input, select { font: inherit; }
   --green-200: #edfaef;
   --green-300: #bdebc4;
   --green-500: #00a651;
-  --green-800: #102d06;
-  --green-900: #0a2108;
+  --green-800: #183930;
+  --green-900: #0f241e;
 
   /* ── Semantic (Figma Wedding-2027) ── */
   --text-subhead: var(--green-800);
@@ -606,7 +606,7 @@ button, input, select { font: inherit; }
   padding-left: 16px;
   padding-right: 32px;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23102d06' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); /* green-800 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23183930' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); /* green-800 */
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 12px 8px;
