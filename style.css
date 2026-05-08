@@ -247,7 +247,8 @@ button, input, select { font: inherit; }
 }
 
 .hero .star-divider {
-  --star-rule-color: var(--green-300);
+  /* Wing lines use same token as images/illustration/star.svg */
+  --star-rule-color: var(--green-500);
 }
 
 .travel-wrapper .star-divider {
