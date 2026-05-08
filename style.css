@@ -39,15 +39,51 @@ button, input, select { font: inherit; }
 .font-funk {
   font-family: Optima, 'Trebuchet MS', sans-serif;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.01em;
-  font-size: 21px;
-  line-height: 28px;
+  text-transform: none;
+}
+
+.font-funk-caps {
+  font-family: Optima, 'Trebuchet MS', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
 .font-serif {
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 500;
+}
+
+/* ── Figma-aligned type scales (responsive) ── */
+.type-subhead {
+  font-size: 21px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+}
+
+.type-title-script {
+  font-family: 'Pinyon Script', cursive;
+  font-weight: 400;
+  font-size: 80px;
+  line-height: 100px;
+}
+
+.type-p1 {
+  font-size: 21px;
+  line-height: 32px;
+}
+
+.type-p2 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.type-strong {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--neutral-900);
 }
 
 /* ── Color Tokens ── */
@@ -683,17 +719,9 @@ button, input, select { font: inherit; }
   color: var(--rose-500);
   margin-top: 24px;
   margin-bottom: 24px;
-  /* Figma website/desktop Subhead: 21/24, tracking 1 */
-  font-size: 21px;
-  line-height: 24px;
-  letter-spacing: 0.01em;
 }
 
 .hero .script-name {
-  font-family: 'Pinyon Script', cursive;
-  font-weight: 400;
-  font-size: 80px;
-  line-height: 100px;
   color: var(--rose-300);
   margin: 0;
 }
@@ -744,9 +772,6 @@ button, input, select { font: inherit; }
 }
 
 .details-address {
-  /* Figma website/desktop P1: 21/32 */
-  font-size: 21px;
-  line-height: 32px;
   color: var(--green-800);
 }
 
@@ -757,10 +782,6 @@ button, input, select { font: inherit; }
 .details-date {
   color: var(--rose-500);
   margin-bottom: 16px;
-  /* Figma website/desktop Subhead: 21/24, tracking 1 */
-  font-size: 21px;
-  line-height: 24px;
-  letter-spacing: 0.01em;
 }
 
 .photo-placeholder {
@@ -813,37 +834,20 @@ button, input, select { font: inherit; }
   padding: 64px 80px 120px;
 }
 
-.event-wrapper .travel-section-heading {
-  /* Figma website/desktop Subhead: 21/24, tracking 1 */
-  font-size: 21px;
-  line-height: 24px;
-  letter-spacing: 0.01em;
-  text-transform: none;
-}
-
 .event-schedule-slot-time {
   font-family: 'EB Garamond', Georgia, serif;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
   color: var(--neutral-900);
   margin: 0;
 }
 
 .event-schedule-slot-title {
   font-family: 'EB Garamond', Georgia, serif;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
   color: var(--text-subhead);
   margin: 0;
 }
 
 .event-schedule-cell {
   font-family: 'EB Garamond', Georgia, serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
   color: var(--text-subhead);
   margin: 0;
 }
@@ -881,17 +885,11 @@ button, input, select { font: inherit; }
   padding-top: 12px;
   text-align: center;
   font-family: 'EB Garamond', Georgia, serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
   color: var(--text-subhead);
 }
 
 .event-extra-block strong {
   display: block;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
   color: var(--neutral-900);
   margin-bottom: 0;
 }
@@ -919,11 +917,6 @@ button, input, select { font: inherit; }
   margin: 24px 0 16px;
   text-align: center;
   width: 100%;
-  /* Figma website/desktop Subhead: 21/24, tracking 1, mixed case */
-  font-size: 21px;
-  line-height: 24px;
-  letter-spacing: 0.01em;
-  text-transform: none;
 }
 
 .travel-row {
@@ -934,19 +927,7 @@ button, input, select { font: inherit; }
   padding: 12px 0 24px;
 }
 
-.travel-code {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
-  color: var(--neutral-900);
-}
-
-.travel-name,
-.travel-detail {
-  /* Figma website/desktop P2: 16/24 */
-  font-size: 16px;
-  line-height: 24px;
-}
+/* Travel type is applied via type-* utility classes in travel.html */
 
 .hotel-row {
   display: flex;
@@ -963,21 +944,9 @@ button, input, select { font: inherit; }
   min-width: 200px;
 }
 
-.hotel-name {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
-  color: var(--neutral-900);
-}
+/* Hotel type is applied via type-* utility classes in travel.html */
 
-.hotel-address {
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.hotel-info .hotel-address:last-child {
-  font-weight: 700;
-}
+.hotel-info .hotel-address:last-child { font-weight: 700; }
 
 .hotel-buttons {
   display: flex;
@@ -996,17 +965,10 @@ button, input, select { font: inherit; }
 }
 
 .favs-category h4 {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
-  color: var(--neutral-900);
   margin-bottom: 4px;
 }
 
-.favs-category p {
-  font-size: 16px;
-  line-height: 24px;
-}
+/* Local favs type is applied via type-* utility classes in travel.html */
 
 /* ========================================
    REGISTRY PAGE
@@ -1022,8 +984,11 @@ button, input, select { font: inherit; }
 }
 
 .registry-wrapper .star-divider {
-  max-width: 400px;
-  --star-rule-color: var(--green-300);
+  max-width: var(--content-rail);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  --star-rule-color: var(--green-500);
 }
 
 .registry-wrapper .coming-soon {
@@ -1039,6 +1004,31 @@ button, input, select { font: inherit; }
    RESPONSIVE — MOBILE (<768px)
    ======================================== */
 @media (max-width: 767px) {
+  /* Type scale utilities (mobile) */
+  .type-subhead {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .type-title-script {
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  .type-p1 {
+    font-size: 19px;
+    line-height: 28px;
+  }
+
+  .type-p2 {
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .type-strong {
+    font-size: 16px;
+    line-height: 21px;
+  }
 
   /* Nav stays above overlay; controls stay top-right like desktop */
   .site-nav {
@@ -1111,19 +1101,6 @@ button, input, select { font: inherit; }
     padding: 40px 20px 60px;
   }
 
-  .hero .script-name {
-    /* Figma website/mobile Title: 48/56 */
-    font-size: 48px;
-    line-height: 56px;
-  }
-
-  .hero .subheading {
-    /* Figma website/mobile Subhead: 18/24, tracking 1 */
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: 0.01em;
-  }
-
   /* Details */
   .details-section {
     padding: 32px 20px;
@@ -1144,18 +1121,7 @@ button, input, select { font: inherit; }
   .details-left   { order: 2; }
   .details-right  { order: 3; text-align: center; }
 
-  .details-address {
-    /* Figma website/mobile P1: 19/28 */
-    font-size: 19px;
-    line-height: 28px;
-  }
-
-  .details-date,
-  .details-time {
-    font-size: 18px !important;
-    line-height: 24px;
-    letter-spacing: 0.01em;
-  }
+  /* Home type now comes from type-* utilities */
 
   /* RSVP */
   .rsvp-section {
@@ -1165,12 +1131,6 @@ button, input, select { font: inherit; }
   /* Event */
   .event-wrapper {
     padding: 40px 20px 80px;
-  }
-
-  .event-wrapper .travel-section-heading {
-    /* Figma website/mobile Subhead: 18/24, tracking 1 */
-    font-size: 18px;
-    line-height: 24px;
   }
 
   .church-illustration {
@@ -1191,23 +1151,7 @@ button, input, select { font: inherit; }
     margin-bottom: 0;
   }
 
-  .event-schedule-slot-time,
-  .event-schedule-slot-title,
-  .event-schedule-cell,
-  .event-extra-block {
-    /* Figma website/mobile P3: 14/21 */
-    font-size: 14px;
-    line-height: 21px;
-  }
-
-  .event-schedule-slot-time {
-    font-size: 16px;
-  }
-
-  .event-extra-block strong {
-    font-size: 16px;
-    line-height: 21px;
-  }
+  /* Event type now comes from type-* utilities */
 
   /* Event schedule: single column — centered; venue + address lines flush */
   .event-wrapper .travel-row {
@@ -1240,39 +1184,7 @@ button, input, select { font: inherit; }
     grid-template-columns: 1fr;
   }
 
-  .travel-section-heading {
-    /* Figma website/mobile Subhead: 18/24, tracking 1, mixed case */
-    font-size: 18px;
-    line-height: 24px;
-  }
-
-  .travel-name,
-  .travel-detail {
-    /* Figma website/mobile P3: 14/21 */
-    font-size: 14px;
-    line-height: 21px;
-  }
-
-  .travel-code,
-  .hotel-name {
-    font-size: 16px;
-    line-height: 21px;
-  }
-
-  .hotel-address {
-    font-size: 14px;
-    line-height: 21px;
-  }
-
-  .favs-category h4 {
-    font-size: 14px;
-    line-height: 21px;
-  }
-
-  .favs-category p {
-    font-size: 14px;
-    line-height: 21px;
-  }
+  /* Travel type now comes from type-* utilities */
 
   .hotel-row {
     flex-direction: column;
