@@ -384,19 +384,40 @@ button, input, select { font: inherit; }
   transition: transform var(--motion-standard) var(--ease-standard), opacity var(--motion-standard) var(--ease-standard);
 }
 
-.mobile-menu-links a:hover,
-.mobile-menu-links a:focus-visible {
-  color: var(--text-link-active);
-  outline: none;
+.mobile-menu-links a:visited:not(.active) {
+  color: var(--text-link-resting);
 }
 
-.mobile-menu-links a:hover::after,
-.mobile-menu-links a:focus-visible::after {
-  transform: scaleX(1);
-  opacity: 1;
+.mobile-menu-links a:visited:not(.active)::after {
+  transform: scaleX(0);
+  opacity: 0;
 }
 
-.mobile-menu-links a:active {
+/* Touch: avoid sticky :hover; keyboard/mouse: show hover + focus ring */
+@media (hover: hover) {
+  .mobile-menu-links a:hover,
+  .mobile-menu-links a:focus-visible {
+    color: var(--text-link-active);
+    outline: none;
+  }
+
+  .mobile-menu-links a:hover::after,
+  .mobile-menu-links a:focus-visible::after {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.mobile-menu-links a:focus:not(:focus-visible):not(.active) {
+  color: var(--text-link-resting);
+}
+
+.mobile-menu-links a:focus:not(:focus-visible):not(.active)::after {
+  transform: scaleX(0);
+  opacity: 0;
+}
+
+.mobile-menu-links a:active:not(.active) {
   color: var(--text-link-active);
 }
 
@@ -1173,11 +1194,12 @@ button, input, select { font: inherit; }
     line-height: 21px;
   }
 
-  /* Nav stays above overlay; controls stay top-right like desktop */
+  /* Nav stays above overlay; menu icon top-right */
   .site-nav {
     height: 64px;
     padding: 0 24px;
     z-index: 102;
+    justify-content: flex-end;
   }
 
   .nav-links {
