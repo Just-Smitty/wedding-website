@@ -1377,3 +1377,12 @@ button, input, select { font: inherit; }
     padding: 48px 24px;
   }
 }
+
+/* ========================================
+   RSVP — temporarily hidden
+   Delete this block to restore nav link + form.
+   ======================================== */
+.nav-rsvp,
+.rsvp-section {
+  display: none !important;
+}
