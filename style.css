@@ -368,6 +368,8 @@ button, input, select { font: inherit; }
   text-align: center;
   position: relative;
   transition: color var(--motion-standard) var(--ease-standard);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-menu-links a::after {
