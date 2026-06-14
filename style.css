@@ -355,6 +355,8 @@ button, input, select { font: inherit; }
   width: 100%;
   padding: 40px 24px;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
 
 .mobile-menu-links a {
@@ -804,7 +806,8 @@ button, input, select { font: inherit; }
   position: relative;
 }
 
-.grain::after {
+.grain::after,
+.mobile-menu::after {
   content: '';
   position: absolute;
   inset: 0;
