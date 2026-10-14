@@ -43,21 +43,66 @@
   </div>
 
   <!-- ════════ REGISTRY ════════ -->
-  <main class="registry-wrapper grain">
+  <main class="registry-wrapper grain grain-light">
+    <div class="travel-inner">
 
-    <div class="star-divider">
-      <span class="line"></span>
-      <img class="star-divider-mark" src="images/illustration/star.svg" alt="" width="77" height="24">
-      <span class="line"></span>
+      <div class="star-divider">
+        <span class="line"></span>
+        <img class="star-divider-mark" src="images/illustration/star.svg" alt="" width="77" height="24">
+        <span class="line"></span>
+      </div>
+
+      <h1 class="font-funk type-subhead travel-section-heading">Registry</h1>
+
+      <p class="type-p1 registry-intro">If you&rsquo;d like to give a gift, you can shop either of our registries.</p>
+
+      <div class="hotel-row">
+        <div class="hotel-info">
+          <p class="type-strong hotel-name">Bloomingdale&rsquo;s</p>
+        </div>
+        <div class="hotel-buttons">
+          <a href="https://www.bloomingdales.com/registry/Madison-Forster-Ryan-Smith/1733520" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View registry</a>
+        </div>
+      </div>
+
+      <div class="hotel-row">
+        <div class="hotel-info">
+          <p class="type-strong hotel-name">Over the Moon</p>
+        </div>
+        <div class="hotel-buttons">
+          <a href="https://overthemoon.com/apps/registry/forster-smith-1d41" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View registry</a>
+        </div>
+      </div>
+
     </div>
-
-    <h1 class="coming-soon">Coming soon</h1>
-
   </main>
 
-  <!-- No footer on registry page -->
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="site-footer">
+    <img class="footer-gators" src="images/illustration/gators.svg" alt="Dancing gators" width="164" height="158">
+  </footer>
 
   <script>
+    function initReveals() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var targets = Array.prototype.slice.call(document.querySelectorAll(
+        '.star-divider, .travel-section-heading, .registry-intro, .hotel-row'
+      ));
+      if (!targets.length) return;
+
+      targets.forEach(function(el) { el.classList.add('reveal'); });
+
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('reveal-in');
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+
+      targets.forEach(function(el) { io.observe(el); });
+    }
+
     function toggleMenu() {
       var menu = document.getElementById('mobileMenu');
       var btn = document.querySelector('.site-nav .hamburger');
@@ -105,6 +150,7 @@
         lastMenuFocus = null;
       }
     }
+    initReveals();
     document.querySelectorAll('.mobile-menu-links a').forEach(function(a) {
       a.addEventListener('click', function() {
         setMenuOpen(false);

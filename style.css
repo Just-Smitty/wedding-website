@@ -1105,12 +1105,14 @@ button, input, select { font: inherit; }
 
 /* Small tablet: avoid cramped side-by-side actions */
 @media (max-width: 980px) {
-  .travel-wrapper .hotel-row {
+  .travel-wrapper .hotel-row,
+  .registry-wrapper .hotel-row {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .travel-wrapper .hotel-buttons {
+  .travel-wrapper .hotel-buttons,
+  .registry-wrapper .hotel-buttons {
     width: 100%;
     max-width: 520px;
     margin-left: auto;
@@ -1120,7 +1122,8 @@ button, input, select { font: inherit; }
     gap: 8px;
   }
 
-  .travel-wrapper .hotel-buttons .btn {
+  .travel-wrapper .hotel-buttons .btn,
+  .registry-wrapper .hotel-buttons .btn {
     width: 100%;
   }
 }
@@ -1143,30 +1146,19 @@ button, input, select { font: inherit; }
    REGISTRY PAGE
    ======================================== */
 .registry-wrapper {
-  background: var(--background-contrast-high);
-  min-height: calc(100vh - 100px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 64px 24px 80px;
+  background: var(--cream-100);
+  padding: 64px 80px 120px;
 }
 
 .registry-wrapper .star-divider {
-  max-width: var(--content-rail);
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
   --star-rule-color: var(--green-500);
 }
 
-.registry-wrapper .coming-soon {
-  font-family: 'Pinyon Script', cursive;
-  font-weight: 400;
-  font-size: 80px;
-  color: var(--rose-300);
+.registry-intro {
   text-align: center;
-  margin-top: 24px;
+  color: var(--text-subhead);
+  margin: 0 auto 8px;
+  max-width: 36em;
 }
 
 /* ========================================
@@ -1392,11 +1384,7 @@ button, input, select { font: inherit; }
 
   /* Registry */
   .registry-wrapper {
-    min-height: calc(100vh - 64px);
-  }
-
-  .registry-wrapper .coming-soon {
-    font-size: 42px;
+    padding: 40px 20px 80px;
   }
 
   /* Footer */
