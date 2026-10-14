@@ -1105,14 +1105,12 @@ button, input, select { font: inherit; }
 
 /* Small tablet: avoid cramped side-by-side actions */
 @media (max-width: 980px) {
-  .travel-wrapper .hotel-row,
-  .registry-wrapper .hotel-row {
+  .travel-wrapper .hotel-row {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .travel-wrapper .hotel-buttons,
-  .registry-wrapper .hotel-buttons {
+  .travel-wrapper .hotel-buttons {
     width: 100%;
     max-width: 520px;
     margin-left: auto;
@@ -1122,8 +1120,7 @@ button, input, select { font: inherit; }
     gap: 8px;
   }
 
-  .travel-wrapper .hotel-buttons .btn,
-  .registry-wrapper .hotel-buttons .btn {
+  .travel-wrapper .hotel-buttons .btn {
     width: 100%;
   }
 }
@@ -1146,19 +1143,59 @@ button, input, select { font: inherit; }
    REGISTRY PAGE
    ======================================== */
 .registry-wrapper {
-  background: var(--cream-100);
-  padding: 64px 80px 120px;
+  background: var(--background-contrast-high);
+  --icon-default: var(--icon-default-on-dark);
+  /* Homepage lighter section starts 574px from the top of the page. Nav is 100px, so this section is 474px. */
+  min-height: 474px;
+  padding: 64px 80px 0;
+}
+
+.registry-inner {
+  width: 100%;
+  max-width: var(--content-rail);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .registry-wrapper .star-divider {
   --star-rule-color: var(--green-500);
+  max-width: var(--content-rail);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.registry-intro {
+.registry-title {
+  color: var(--rose-300);
   text-align: center;
-  color: var(--text-subhead);
-  margin: 0 auto 8px;
-  max-width: 36em;
+  margin: 28px 0 40px;
+}
+
+.registry-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  width: 100%;
+}
+
+.registry-item {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  border-top: 1px solid var(--green-800);
+  padding-top: 14px;
+  gap: 14px;
+}
+
+.registry-item .type-strong {
+  color: var(--cream-100);
+}
+
+.registry-item .btn {
+  width: 100%;
 }
 
 /* ========================================
@@ -1384,7 +1421,17 @@ button, input, select { font: inherit; }
 
   /* Registry */
   .registry-wrapper {
-    padding: 40px 20px 80px;
+    min-height: 0;
+    padding: 40px 20px 60px;
+  }
+
+  .registry-title {
+    margin: 16px 0 32px;
+  }
+
+  .registry-list {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   /* Footer */
