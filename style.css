@@ -187,6 +187,20 @@ button, input, select { font: inherit; }
   position: sticky;
 }
 
+/* Monogram (Figma 34:7467) — centered in the bar on desktop */
+.site-nav .nav-monogram {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+}
+
+.nav-monogram img {
+  display: block;
+  width: auto;
+  height: 48px;
+}
 .nav-links {
   display: flex;
   align-items: center;
@@ -255,6 +269,18 @@ button, input, select { font: inherit; }
 
 .nav-rsvp:hover {
   opacity: 0.85;
+}
+
+/* Tablet: tighter bar so the links clear the centered monogram */
+@media (max-width: 900px) {
+  .site-nav {
+    padding-right: 40px;
+  }
+
+  .nav-links {
+    padding-left: 40px;
+    gap: 24px;
+  }
 }
 
 /* IconButton (Figma 76:2221) — shared by mobile menu trigger and remove guest */
@@ -1632,10 +1658,31 @@ button, input, select { font: inherit; }
     padding: 0 24px;
     z-index: 102;
     justify-content: flex-end;
+    gap: 12px;
   }
 
   .nav-links {
     display: none;
+  }
+
+  /* Monogram moves to the left edge; the bar's align-items centers it with RSVP and menu */
+  .site-nav .nav-monogram {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin-right: auto;
+  }
+
+  .nav-monogram img {
+    height: 24px;
+  }
+
+  /* Same height as the menu IconButton */
+  .nav-rsvp {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 14px;
   }
 
   /* Sheet below bar — bar + hamburger / RSVP remain visible when open */
