@@ -19,7 +19,7 @@
       <a href="registry.html">Registry</a>
     </div>
     <a href="index.html#rsvp" class="nav-rsvp">RSVP</a>
-    <button type="button" class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMenu()">
+    <button type="button" class="icon-button hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMenu()">
       <span class="hamburger-icons" aria-hidden="true">
         <svg class="nav-menu-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2 4L16 4" stroke="currentColor"/>
@@ -115,18 +115,24 @@
           <div class="guest-entry" data-guest="1">
             <div class="form-group autocomplete-wrap">
               <label>Guest 1 name</label>
-              <input type="text" name="guest1_name" autocomplete="off" placeholder="Start typing a name..." required>
+              <input type="text" name="guest1_name" autocomplete="off" placeholder="Name" required>
               <div class="autocomplete-dropdown"></div>
               <p class="field-error"></p>
             </div>
-            <div class="form-group">
+            <fieldset class="form-group attendance">
+              <legend>Will you be attending?</legend>
+              <div class="attendance-options">
+                <label class="attendance-option"><input type="radio" name="guest1_attending" value="Accepts"><span>Joyfully accepts</span></label>
+                <label class="attendance-option"><input type="radio" name="guest1_attending" value="Declines"><span>Regretfully declines</span></label>
+              </div>
+              <p class="field-error"></p>
+            </fieldset>
+            <div class="form-group entree-group" hidden>
               <label>Entree option</label>
-              <select name="guest1_entree">
+              <select name="guest1_entree" disabled>
                 <option value="" disabled selected>Select entree</option>
-                <option value="beef">Beef</option>
-                <option value="chicken">Chicken</option>
-                <option value="fish">Fish</option>
-                <option value="vegetarian">Vegetarian</option>
+                <option value="Chicken &amp; Mahi">Chicken &amp; Mahi</option>
+                <option value="Short Ribs &amp; Shrimp">Short Ribs &amp; Shrimp</option>
               </select>
             </div>
           </div>
@@ -137,7 +143,7 @@
           Add guest
         </button>
 
-        <button type="submit" class="btn-continue">Continue</button>
+        <button type="submit" class="btn-continue" hidden disabled>Continue</button>
       </form>
     </div>
   </section>
@@ -287,7 +293,14 @@
     ];
 
     var guestCount = 1;
-    var selectedNames = new Set();
+
+    /* True if another guest row on this RSVP already has this name */
+    function isNameTaken(name, input) {
+      var inputs = document.querySelectorAll('#guestList .autocomplete-wrap input[type="text"]');
+      return Array.prototype.some.call(inputs, function(other) {
+        return other !== input && other.value.trim().toLowerCase() === name.toLowerCase();
+      });
+    }
 
     /* ── Autocomplete ── */
     function setupAutocomplete(input) {
@@ -303,7 +316,7 @@
         if (val.length < 1) { dropdown.style.display = 'none'; return; }
 
         var matches = GUESTS.filter(function(name) {
-          return name.toLowerCase().indexOf(val) !== -1 && !selectedNames.has(name);
+          return name.toLowerCase().indexOf(val) !== -1 && !isNameTaken(name, input);
         });
 
         if (matches.length === 0) {
@@ -320,14 +333,11 @@
             + name.substring(idx + val.length);
           item.addEventListener('mousedown', function(e) {
             e.preventDefault();
-            var prev = input.getAttribute('data-selected');
-            if (prev) selectedNames.delete(prev);
             input.value = name;
-            input.setAttribute('data-selected', name);
-            selectedNames.add(name);
             dropdown.style.display = 'none';
             errorEl.textContent = '';
             input.classList.remove('invalid');
+            updateContinue();
           });
           dropdown.appendChild(item);
         });
@@ -345,6 +355,10 @@
         setTimeout(function() {
           dropdown.style.display = 'none';
           validateField(self);
+          /* Clears a stale "already on this RSVP" error once the other row changes */
+          document.querySelectorAll('#guestList .autocomplete-wrap input.invalid').forEach(function(other) {
+            if (other !== self) validateField(other);
+          });
         }, 150);
       });
     }
@@ -365,13 +379,12 @@
         errorEl.textContent = "Please select a name from the guest list";
         return false;
       }
-      if (input.getAttribute('data-selected') !== match) {
-        var prev = input.getAttribute('data-selected');
-        if (prev) selectedNames.delete(prev);
-        input.value = match;
-        input.setAttribute('data-selected', match);
-        selectedNames.add(match);
+      if (isNameTaken(match, input)) {
+        input.classList.add('invalid');
+        errorEl.textContent = 'This guest is already on this RSVP';
+        return false;
       }
+      input.value = match;
       input.classList.remove('invalid');
       errorEl.textContent = '';
       return true;
@@ -386,22 +399,33 @@
       entry.innerHTML =
         '<div class="guest-entry-header">' +
           '<span class="guest-entry-label">Guest ' + guestCount + '</span>' +
-          '<button type="button" class="btn-remove-guest" title="Remove guest">&times;</button>' +
+          '<button type="button" class="icon-button icon-button-sm icon-button-light btn-remove-guest" aria-label="Remove guest" title="Remove guest">' +
+            '<svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+              '<path d="M3 3L15 15" stroke="currentColor"/>' +
+              '<path d="M3 15L15 3" stroke="currentColor"/>' +
+            '</svg>' +
+          '</button>' +
         '</div>' +
         '<div class="form-group autocomplete-wrap">' +
           '<label>Name</label>' +
-          '<input type="text" name="guest' + guestCount + '_name" autocomplete="off" placeholder="Start typing a name...">' +
+          '<input type="text" name="guest' + guestCount + '_name" autocomplete="off" placeholder="Name">' +
           '<div class="autocomplete-dropdown"></div>' +
           '<p class="field-error"></p>' +
         '</div>' +
-        '<div class="form-group">' +
+        '<fieldset class="form-group attendance">' +
+          '<legend>Will you be attending?</legend>' +
+          '<div class="attendance-options">' +
+            '<label class="attendance-option"><input type="radio" name="guest' + guestCount + '_attending" value="Accepts"><span>Joyfully accepts</span></label>' +
+            '<label class="attendance-option"><input type="radio" name="guest' + guestCount + '_attending" value="Declines"><span>Regretfully declines</span></label>' +
+          '</div>' +
+          '<p class="field-error"></p>' +
+        '</fieldset>' +
+        '<div class="form-group entree-group" hidden>' +
           '<label>Entree option</label>' +
-          '<select name="guest' + guestCount + '_entree">' +
+          '<select name="guest' + guestCount + '_entree" disabled>' +
             '<option value="" disabled selected>Select entree</option>' +
-            '<option value="beef">Beef</option>' +
-            '<option value="chicken">Chicken</option>' +
-            '<option value="fish">Fish</option>' +
-            '<option value="vegetarian">Vegetarian</option>' +
+            '<option value="Chicken &amp; Mahi">Chicken &amp; Mahi</option>' +
+            '<option value="Short Ribs &amp; Shrimp">Short Ribs &amp; Shrimp</option>' +
           '</select>' +
         '</div>';
 
@@ -409,13 +433,15 @@
 
       var newInput = entry.querySelector('input[type="text"]');
       setupAutocomplete(newInput);
+      setupAttendance(entry);
       newInput.focus();
+      updateContinue();
 
       entry.querySelector('.btn-remove-guest').addEventListener('click', function() {
-        var selName = newInput.getAttribute('data-selected');
-        if (selName) selectedNames.delete(selName);
         entry.remove();
+        document.querySelectorAll('#guestList .autocomplete-wrap input.invalid').forEach(validateField);
         renumberGuests();
+        updateContinue();
       });
     });
 
@@ -429,10 +455,59 @@
         var nameLabel = entry.querySelector('.autocomplete-wrap label');
         if (nameLabel) nameLabel.textContent = num === 1 ? 'Guest 1 name' : 'Name';
         entry.querySelector('input[type="text"]').name = 'guest' + num + '_name';
+        entry.querySelectorAll('.attendance input[type="radio"]').forEach(function(radio) {
+          radio.name = 'guest' + num + '_attending';
+        });
         entry.querySelector('select').name = 'guest' + num + '_entree';
       });
       guestCount = entries.length;
     }
+
+    /* ── Attendance ── */
+    function setupAttendance(entry) {
+      var fieldset = entry.querySelector('.attendance');
+      var entreeGroup = entry.querySelector('.entree-group');
+      var select = entreeGroup.querySelector('select');
+
+      fieldset.addEventListener('change', function(e) {
+        if (e.target.type !== 'radio') return;
+        fieldset.classList.remove('invalid');
+        fieldset.querySelector('.field-error').textContent = '';
+
+        /* Disabled selects aren't submitted, so declined guests send no entree */
+        var accepts = e.target.value === 'Accepts';
+        entreeGroup.hidden = !accepts;
+        select.disabled = !accepts;
+        if (!accepts) {
+          select.selectedIndex = 0;
+          select.classList.remove('filled', 'invalid');
+          var err = entreeGroup.querySelector('.field-error');
+          if (err) err.textContent = '';
+        }
+      });
+    }
+
+    /* ── Continue visibility ── */
+    function isGuestComplete(entry) {
+      var input = entry.querySelector('.autocomplete-wrap input[type="text"]');
+      var name = input.value.trim().toLowerCase();
+      var onList = GUESTS.some(function(g) { return g.toLowerCase() === name; });
+      var choice = entry.querySelector('.attendance input[type="radio"]:checked');
+      if (!onList || isNameTaken(name, input) || !choice) return false;
+      return choice.value === 'Declines' || entry.querySelector('.entree-group select').value !== '';
+    }
+
+    function updateContinue() {
+      var entries = document.querySelectorAll('#guestList .guest-entry');
+      var complete = Array.prototype.every.call(entries, isGuestComplete);
+      var btn = document.querySelector('#rsvpForm .btn-continue');
+      btn.hidden = !complete;
+      /* Hidden alone doesn't block submitting with the Enter key */
+      btn.disabled = !complete;
+    }
+
+    document.getElementById('rsvpForm').addEventListener('input', updateContinue);
+    document.getElementById('rsvpForm').addEventListener('change', updateContinue);
 
     /* ── Form submit validation ── */
     document.getElementById('rsvpForm').addEventListener('submit', function(e) {
@@ -453,9 +528,23 @@
           allValid = false;
         }
 
-        /* Entree validation — required if name is filled (always for guest 1) */
+        /* Attendance — required if name is filled (always for guest 1) */
         var namePresent = i === 0 || val;
-        if (namePresent && !select.value) {
+        var fieldset = entry.querySelector('.attendance');
+        var attendanceError = fieldset.querySelector('.field-error');
+        var choice = fieldset.querySelector('input[type="radio"]:checked');
+        if (namePresent && !choice) {
+          fieldset.classList.add('invalid');
+          attendanceError.textContent = 'Please let us know if you can make it';
+          allValid = false;
+        } else {
+          fieldset.classList.remove('invalid');
+          attendanceError.textContent = '';
+        }
+
+        /* Entree validation — required for guests who accept */
+        var accepts = choice && choice.value === 'Accepts';
+        if (namePresent && accepts && !select.value) {
           select.classList.add('invalid');
           var selectGroup = select.closest('.form-group');
           var selectError = selectGroup.querySelector('.field-error');
@@ -474,12 +563,204 @@
         }
       });
 
+      e.preventDefault();
+
       if (!allValid) {
-        e.preventDefault();
         var firstInvalid = this.querySelector('.invalid');
+        if (firstInvalid && firstInvalid.matches('fieldset')) {
+          firstInvalid = firstInvalid.querySelector('input[type="radio"]');
+        }
         if (firstInvalid) firstInvalid.focus();
+        return;
       }
+
+      showConfirmation(this);
     });
+
+    /* Kept by guest name so notes survive "Edit selection" */
+    var allergyNotes = {};
+    var RSVP_EXIT_MS = 140;
+    var RSVP_FILL_MS = 520;
+
+    /* Visit index.html?rsvp-test to run the flow without sending anything to Formspree */
+    var RSVP_TEST = /[?&]rsvp-test(&|=|$)/.test(window.location.search);
+    var rsvpTestPanel = null;
+    if (RSVP_TEST) {
+      rsvpTestPanel = document.createElement('aside');
+      rsvpTestPanel.className = 'rsvp-test-panel';
+      rsvpTestPanel.innerHTML = '<strong>RSVP test mode</strong> Nothing will be sent.<pre></pre>';
+      document.body.appendChild(rsvpTestPanel);
+    }
+
+    /* Fields grouped per guest so the email reads one guest at a time */
+    function buildRsvpData(guests) {
+      var data = new FormData();
+      data.append('_subject', 'RSVP: ' + guests.map(function(g) { return g.name; }).join(', '));
+      guests.forEach(function(g, i) {
+        var key = 'guest' + (i + 1);
+        data.append(key + '_name', g.name);
+        data.append(key + '_attending', g.accepts ? 'Accepts' : 'Declines');
+        if (g.accepts) {
+          data.append(key + '_entree', g.entree);
+          data.append(key + '_allergies', allergyNotes[g.name] || '');
+        }
+      });
+      return data;
+    }
+
+    /* ── Send RSVP once the guest confirms ── */
+    function submitRsvp(form, box, guests) {
+      var btn = box.querySelector('.rsvp-confirm');
+      var errorEl = box.querySelector('.submit-error');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      errorEl.textContent = '';
+
+      var data = buildRsvpData(guests);
+
+      if (RSVP_TEST) {
+        var lines = [];
+        data.forEach(function(value, key) { lines.push(key + ': ' + (value || '(blank)')); });
+        rsvpTestPanel.querySelector('pre').textContent = lines.join('\n');
+        showConfirmed(box, guests.some(function(g) { return g.accepts; }));
+        return;
+      }
+
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        /* Formspree replies with JSON instead of redirecting to its thank-you page */
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(function(res) {
+          if (!res.ok) throw new Error('RSVP failed: ' + res.status);
+          showConfirmed(box, guests.some(function(g) { return g.accepts; }));
+        })
+        .catch(function() {
+          btn.disabled = false;
+          btn.textContent = 'Confirm';
+          errorEl.textContent = 'Something went wrong sending your RSVP. Please try again.';
+        });
+    }
+
+    /* ── Confirmed state: header changes, then heart, then message ── */
+    function showConfirmed(box, anyAccept) {
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var card = box.closest('.rsvp-card');
+      var fill = anyAccept && !reduceMotion;
+      box.classList.add('is-leaving');
+
+      /* Dark fill starts as the Confirm button and grows to cover the card */
+      if (fill) {
+        var c = card.getBoundingClientRect();
+        var b = box.querySelector('.rsvp-confirm').getBoundingClientRect();
+        card.style.setProperty('--rsvp-fill-from',
+          (b.top - c.top) + 'px ' + (c.right - b.right) + 'px ' +
+          (c.bottom - b.bottom) + 'px ' + (b.left - c.left) + 'px');
+        card.classList.add('is-filling');
+        window.setTimeout(function() {
+          card.classList.add('is-dark');
+          card.classList.remove('is-filling');
+        }, RSVP_FILL_MS);
+      }
+
+      window.setTimeout(function() {
+        box.classList.remove('is-leaving');
+        box.innerHTML =
+          '<h2 class="type-title-script rsvp-confirmation-title" tabindex="-1"></h2>' +
+          '<div class="rsvp-note">' +
+            '<img class="rsvp-note-heart" alt="">' +
+            '<p class="font-funk rsvp-note-text"></p>' +
+          '</div>' +
+          '<a href="registry.html" class="btn btn-secondary rsvp-registry">View registry</a>';
+
+        var title = box.querySelector('.rsvp-confirmation-title');
+        title.textContent = anyAccept ? 'Yay!' : 'All good!';
+        box.querySelector('.rsvp-note-heart').src = anyAccept
+          ? 'images/illustration/heart-note-attending.svg'
+          : 'images/illustration/heart-note-missed.svg';
+        box.querySelector('.rsvp-note-text').innerHTML = anyAccept
+          ? 'SEE YA ON THE<br>DANCE FLOOR...'
+          : 'YOU WILL<br>BE MISSED...';
+
+        box.classList.add('is-confirmed', 'is-entering');
+        if (anyAccept && !fill) card.classList.add('is-dark');
+        title.focus();
+      }, reduceMotion ? 0 : fill ? RSVP_FILL_MS / 2 : RSVP_EXIT_MS);
+    }
+
+    /* ── Review step (Figma 200:2207) ── */
+    function showConfirmation(form) {
+      var heading = form.closest('.rsvp-card').querySelector('.rsvp-heading');
+      var guests = Array.prototype.map.call(form.querySelectorAll('.guest-entry'), function(entry) {
+        var choice = entry.querySelector('.attendance input[type="radio"]:checked');
+        return {
+          name: entry.querySelector('.autocomplete-wrap input[type="text"]').value.trim(),
+          accepts: choice.value === 'Accepts',
+          entree: entry.querySelector('.entree-group select').value
+        };
+      });
+      var anyAccept = guests.some(function(g) { return g.accepts; });
+
+      var box = document.createElement('div');
+      box.className = 'rsvp-confirmation ' + (anyAccept ? 'is-attending' : 'is-missed');
+      box.setAttribute('role', 'status');
+      box.innerHTML =
+        '<h2 class="font-funk type-subhead rsvp-confirmation-title" tabindex="-1">PLEASE CONFIRM</h2>' +
+        '<ul class="rsvp-guest-list"></ul>' +
+        '<div class="rsvp-confirmation-actions">' +
+          '<button type="button" class="btn btn-secondary rsvp-return">Edit selection</button>' +
+          '<button type="button" class="btn btn-primary rsvp-confirm">Confirm</button>' +
+          '<p class="field-error submit-error" role="alert"></p>' +
+        '</div>';
+
+      var list = box.querySelector('.rsvp-guest-list');
+      guests.forEach(function(g) {
+        var item = document.createElement('li');
+        item.className = 'rsvp-guest';
+        item.innerHTML =
+          '<span class="rsvp-guest-chip">' +
+            '<span class="rsvp-guest-icon' + (g.accepts ? '' : ' is-declined') + '">' +
+              '<img src="images/icon/' + (g.accepts ? 'checkmark-16-green.svg' : 'close-16-rose.svg') + '"' +
+                ' alt="' + (g.accepts ? 'Attending:' : 'Not attending:') + '" width="16" height="16">' +
+            '</span>' +
+            '<span class="rsvp-guest-name"></span>' +
+          '</span>';
+        var label = g.name;
+        if (g.accepts) label += ' / ' + g.entree;
+        else if (!anyAccept) label += ' / Not attending';
+        item.querySelector('.rsvp-guest-name').textContent = label;
+
+        if (g.accepts) {
+          var field = document.createElement('div');
+          field.className = 'form-group rsvp-allergies';
+          var input = document.createElement('input');
+          input.type = 'text';
+          input.placeholder = 'Food allergies (optional)';
+          input.setAttribute('aria-label', 'Food allergies for ' + g.name + ' (optional)');
+          input.value = allergyNotes[g.name] || '';
+          input.addEventListener('input', function() { allergyNotes[g.name] = input.value; });
+          field.appendChild(input);
+          item.appendChild(field);
+        }
+        list.appendChild(item);
+      });
+
+      box.querySelector('.rsvp-return').addEventListener('click', function() {
+        box.replaceWith(form);
+        heading.hidden = false;
+        updateContinue();
+        form.querySelector('.autocomplete-wrap input[type="text"]').focus();
+      });
+
+      box.querySelector('.rsvp-confirm').addEventListener('click', function() {
+        submitRsvp(form, box, guests);
+      });
+
+      heading.hidden = true;
+      form.replaceWith(box);
+      box.querySelector('.rsvp-confirmation-title').focus();
+    }
 
     /* ── Select filled state ── */
     function setupSelectState(select) {
@@ -510,6 +791,7 @@
 
     /* ── Init autocomplete on first guest ── */
     setupAutocomplete(document.querySelector('.guest-entry input[type="text"]'));
+    setupAttendance(document.querySelector('.guest-entry'));
   </script>
 
 </body>
