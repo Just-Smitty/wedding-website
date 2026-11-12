@@ -113,6 +113,7 @@ button, input, select { font: inherit; }
   --green-200: #edfaef;
   --green-300: #bdebc4;
   --green-500: #00a651;
+  --green-700: #296050;
   --green-800: #183930;
   --green-900: #0f241e;
 
@@ -256,14 +257,73 @@ button, input, select { font: inherit; }
   opacity: 0.85;
 }
 
-/* Mobile menu trigger — IconButton (Figma 76:2221 dark on nav 122:4433) */
-.hamburger {
-  display: none;
+/* IconButton (Figma 76:2221) — shared by mobile menu trigger and remove guest */
+.icon-button {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  cursor: pointer;
   flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 7px;
+  border-radius: 9999px;
+  background: var(--background-button-primary-resting);
+  border: 1px solid var(--background-button-primary-resting);
+  /* Dark fill, so the icon always uses the on-dark color */
+  color: var(--icon-default-on-dark);
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.icon-button:hover {
+  opacity: 0.92;
+  border-color: var(--green-500);
+}
+
+.icon-button:active {
+  background: var(--green-900);
+  border-color: var(--green-500);
+}
+
+.icon-button:focus-visible {
+  outline: 2px solid var(--green-300);
+  outline-offset: 2px;
+}
+
+/* Small IconButton — 24px container, 16px icon */
+.icon-button-sm {
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+}
+
+/* Light IconButton — for light backgrounds */
+.icon-button-light {
+  background: transparent;
+  border-color: transparent;
+  color: var(--neutral-900);
+}
+
+.icon-button-light:focus-visible {
+  background: var(--neutral-200);
+}
+
+.icon-button-light:hover,
+.icon-button-light:active {
+  opacity: 1;
+  background: var(--rose-200);
+  border-color: transparent;
+  color: var(--rose-800);
+}
+
+.icon-button-light:focus-visible {
+  outline-color: var(--green-500);
+}
+
+/* Mobile menu trigger — IconButton on nav (Figma 122:4433) */
+.hamburger {
+  display: none;
 }
 
 /* Full-screen mobile sheet (Figma Navigation / mobile menu) */
@@ -538,7 +598,7 @@ button, input, select { font: inherit; }
 
 /* Secondary — pressed */
 .btn-secondary:active {
-  background: var(--green-300);
+  background: var(--green-200);
   border-color: var(--green-800);
 }
 
@@ -585,7 +645,7 @@ button, input, select { font: inherit; }
   max-width: 560px;
   min-width: 290px;
   margin: 0 auto;
-  background: var(--cream-100);
+  background: var(--white);
   border-radius: 8px;
   box-shadow:
     0 8px 24px rgba(10, 33, 8, 0.12),
@@ -622,7 +682,7 @@ button, input, select { font: inherit; }
   font-weight: 500;
   font-size: 16px;
   color: var(--neutral-700);
-  background: var(--cream-100);
+  background: var(--white);
   outline: none;
   transition: border-color 0.2s, background 0.2s;
 }
@@ -649,20 +709,20 @@ button, input, select { font: inherit; }
 .form-group select:focus {
   border-color: var(--green-800);
   color: var(--green-800);
-  background: var(--cream-100);
+  background-color: var(--white);
 }
 
 /* Input — filled */
 .form-group input:not(:placeholder-shown) {
   border-color: var(--green-800);
   color: var(--green-800);
-  background: var(--cream-100);
+  background: var(--white);
 }
 
 .form-group select.filled {
   border-color: var(--green-800);
   color: var(--green-800);
-  background-color: var(--cream-100);
+  background-color: var(--white);
 }
 
 /* ── Autocomplete ── */
@@ -673,13 +733,12 @@ button, input, select { font: inherit; }
 .autocomplete-dropdown {
   display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 4px);
   left: 0;
   right: 0;
   background: var(--white);
   border: 1px solid var(--green-300);
-  border-top: none;
-  border-radius: 0 0 8px 8px;
+  border-radius: 8px;
   max-height: 200px;
   overflow-y: auto;
   z-index: 50;
@@ -711,7 +770,7 @@ button, input, select { font: inherit; }
 }
 
 .field-error {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--rose-500);
   margin: 4px 0 0;
   min-height: 0;
@@ -719,6 +778,100 @@ button, input, select { font: inherit; }
 
 .field-error:empty {
   display: none;
+}
+
+/* ── Attendance ── */
+.attendance {
+  border: none;
+  padding: 0;
+  margin: 0 0 8px;
+  min-width: 0;
+}
+
+/* Visually hidden; still announced by screen readers */
+.attendance legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.attendance-options {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
+}
+
+.form-group .attendance-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin: 0;
+  font-size: 16px;
+  color: var(--neutral-700);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.form-group .attendance-option input[type="radio"] {
+  appearance: none;
+  flex: none;
+  display: grid;
+  place-content: center;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--green-300);
+  border-radius: 50%;
+  background: var(--white);
+  cursor: pointer;
+}
+
+.form-group .attendance-option input[type="radio"]::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green-800);
+  transform: scale(0);
+  transition: transform 0.15s;
+}
+
+.form-group .attendance-option:hover {
+  color: var(--green-800);
+}
+
+.form-group .attendance-option:hover input[type="radio"] {
+  border-color: var(--green-500);
+}
+
+.form-group .attendance-option input[type="radio"]:focus-visible {
+  outline: 2px solid var(--green-500);
+  outline-offset: 2px;
+}
+
+.form-group .attendance-option input[type="radio"]:checked {
+  border-color: var(--green-800);
+}
+
+.form-group .attendance-option input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.form-group .attendance-option:has(input:checked) {
+  color: var(--green-800);
+}
+
+.attendance.invalid .attendance-option input[type="radio"] {
+  border-color: var(--rose-500);
+  background: var(--rose-200);
 }
 
 /* ── Guest entry ── */
@@ -747,21 +900,6 @@ button, input, select { font: inherit; }
   color: var(--green-800);
 }
 
-.btn-remove-guest {
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: var(--neutral-500);
-  cursor: pointer;
-  padding: 0 4px;
-  line-height: 1;
-  transition: color 0.2s;
-}
-
-.btn-remove-guest:hover {
-  color: var(--rose-500);
-}
-
 .btn-add-guest {
   display: flex;
   align-items: center;
@@ -778,10 +916,18 @@ button, input, select { font: inherit; }
   cursor: pointer;
   justify-content: center;
   margin-bottom: 8px;
-  transition: opacity 0.2s;
+  transition: background 0.2s, border-color 0.2s;
 }
 
-.btn-add-guest:hover { opacity: 0.85; }
+.btn-add-guest:hover {
+  background: var(--green-200);
+  border-color: var(--green-500);
+}
+
+.btn-add-guest:active {
+  background: var(--green-200);
+  border-color: var(--green-800);
+}
 
 .btn-continue {
   width: 100%;
@@ -794,10 +940,262 @@ button, input, select { font: inherit; }
   font-size: 16px;
   color: var(--cream-100);
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-continue:hover,
+.btn-continue:active {
+  background: var(--green-900);
+}
+
+.submit-error {
+  text-align: center;
+}
+
+/* ── Review + confirmed states (replace the form; Figma 200:2207) ── */
+.rsvp-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  /* Confirmed sequence: header, then heart, then message */
+  --rsvp-heart-delay: 200ms;
+  --rsvp-heart-duration: 520ms;
+  --rsvp-message-delay: 600ms;
+  --rsvp-footer-delay: 760ms;
+}
+
+.rsvp-card .rsvp-confirmation-title {
+  width: 100%;
+  margin: 0;
+  color: var(--text-subhead);
+  text-align: center;
+  outline: none;
+}
+
+.rsvp-card .is-confirmed .rsvp-confirmation-title {
+  color: var(--green-700);
+  white-space: nowrap;
+}
+
+.rsvp-guest-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.is-missed .rsvp-guest-list {
+  align-items: center;
+  gap: 16px;
+}
+
+.rsvp-guest {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.is-missed .rsvp-guest {
+  align-items: center;
+}
+
+.form-group.rsvp-allergies {
+  width: 100%;
+  margin: 0;
+}
+
+.rsvp-guest-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--green-800);
+}
+
+.rsvp-guest-icon {
+  display: flex;
+  padding: 4px;
+  border-radius: 9999px;
+  background: var(--green-200);
+}
+
+.rsvp-guest-icon.is-declined {
+  background: var(--rose-200);
+}
+
+.rsvp-note {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 282.625px;
+  max-width: 100%;
+  height: 238px;
+  overflow: hidden;
+}
+
+.rsvp-note-text {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 39.67px);
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--rose-300);
+}
+
+.is-missed .rsvp-note-text {
+  color: var(--rose-500);
+}
+
+.rsvp-confirmation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.rsvp-registry {
+  width: 100%;
+}
+
+/* Attending + confirmed: dark card (Figma 200:2642) */
+.rsvp-card.is-dark {
+  background: var(--background-contrast-high);
+}
+
+/* Keeps its fill while sending so the dark card can grow out of it */
+.rsvp-confirm:disabled {
+  background: var(--background-button-primary-resting);
+  color: var(--cream-100);
+  cursor: progress;
+}
+
+.rsvp-card.is-filling {
+  position: relative;
+  isolation: isolate;
+}
+
+.rsvp-card.is-filling::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--background-contrast-high);
+  animation: rsvp-card-fill 520ms var(--ease-emphasis) both;
+}
+
+/* Matches the header RSVP button */
+.rsvp-card.is-dark .rsvp-registry,
+.rsvp-card.is-dark .rsvp-registry:hover,
+.rsvp-card.is-dark .rsvp-registry:active {
+  background: var(--background-button-primary-resting);
+  border-color: var(--background-button-primary-resting);
+  color: var(--text-contrast-medium);
   transition: opacity 0.2s;
 }
 
-.btn-continue:hover { opacity: 0.85; }
+.rsvp-card.is-dark .rsvp-registry:hover {
+  opacity: 0.85;
+}
+
+/* ── Confirm sequence ── */
+.rsvp-confirmation.is-leaving > * {
+  animation: rsvp-fade-out var(--motion-fast) var(--ease-standard) forwards;
+}
+
+.is-entering .rsvp-confirmation-title {
+  animation: rsvp-rise-in var(--motion-enter) var(--ease-emphasis) both;
+}
+
+.is-entering .rsvp-note-heart {
+  animation: rsvp-heart-in var(--rsvp-heart-duration) var(--ease-emphasis) var(--rsvp-heart-delay) both;
+}
+
+.is-entering .rsvp-note-text {
+  animation: rsvp-note-text-in var(--motion-enter) var(--ease-emphasis) var(--rsvp-message-delay) both;
+}
+
+.is-entering .rsvp-registry {
+  /* backwards, not both: a held final frame would block the hover opacity */
+  animation: rsvp-rise-in var(--motion-enter) var(--ease-emphasis) var(--rsvp-footer-delay) backwards;
+}
+
+@keyframes rsvp-fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes rsvp-rise-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rsvp-heart-in {
+  from { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Keeps the note's translateX(-50%) centering while it rises */
+@keyframes rsvp-note-text-in {
+  from { opacity: 0; transform: translate(-50%, 8px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* --rsvp-fill-from is the Confirm button's inset within the card, set in JS */
+@keyframes rsvp-card-fill {
+  from {
+    clip-path: inset(var(--rsvp-fill-from) round 8px);
+    background: var(--background-button-primary-resting);
+  }
+  to {
+    clip-path: inset(0 round 8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rsvp-confirmation.is-leaving > *,
+  .is-entering .rsvp-confirmation-title,
+  .is-entering .rsvp-note-heart,
+  .is-entering .rsvp-note-text,
+  .is-entering .rsvp-registry {
+    animation: none;
+  }
+}
+
+/* Only shown on index.html?rsvp-test */
+.rsvp-test-panel {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 1000;
+  max-width: calc(100vw - 32px);
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--neutral-900);
+  color: var(--white);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.rsvp-test-panel pre {
+  margin: 0;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+
+.rsvp-test-panel pre:not(:empty) {
+  margin-top: 8px;
+}
 
 /* ========================================
    FILM GRAIN TEXTURE
@@ -1262,30 +1660,6 @@ button, input, select { font: inherit; }
 
   .hamburger {
     display: inline-flex;
-    width: 32px;
-    height: 32px;
-    padding: 7px;
-    border-radius: 9999px;
-    background: var(--background-button-primary-resting);
-    border: 1px solid var(--background-button-primary-resting);
-    /* SVG strokes use currentColor — theme token so nav icons read light on dark */
-    color: var(--icon-default);
-    transition: opacity 0.2s, background 0.2s, border-color 0.2s;
-  }
-
-  .hamburger:hover {
-    opacity: 0.92;
-    border-color: var(--green-500);
-  }
-
-  .hamburger:active {
-    background: var(--green-900);
-    border-color: var(--green-500);
-  }
-
-  .hamburger:focus-visible {
-    outline: 2px solid var(--green-300);
-    outline-offset: 2px;
   }
 
   /* Icon stack sizing lives on .hamburger-icons (single visual control) */
@@ -1438,13 +1812,4 @@ button, input, select { font: inherit; }
   .site-footer {
     padding: 48px 24px;
   }
-}
-
-/* ========================================
-   RSVP — temporarily hidden
-   Delete this block to restore nav link + form.
-   ======================================== */
-.nav-rsvp,
-.rsvp-section {
-  display: none !important;
 }
