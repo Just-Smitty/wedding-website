@@ -293,7 +293,14 @@
     ];
 
     var guestCount = 1;
-    var selectedNames = new Set();
+
+    /* True if another guest row on this RSVP already has this name */
+    function isNameTaken(name, input) {
+      var inputs = document.querySelectorAll('#guestList .autocomplete-wrap input[type="text"]');
+      return Array.prototype.some.call(inputs, function(other) {
+        return other !== input && other.value.trim().toLowerCase() === name.toLowerCase();
+      });
+    }
 
     /* ── Autocomplete ── */
     function setupAutocomplete(input) {
@@ -309,7 +316,7 @@
         if (val.length < 1) { dropdown.style.display = 'none'; return; }
 
         var matches = GUESTS.filter(function(name) {
-          return name.toLowerCase().indexOf(val) !== -1 && !selectedNames.has(name);
+          return name.toLowerCase().indexOf(val) !== -1 && !isNameTaken(name, input);
         });
 
         if (matches.length === 0) {
@@ -326,11 +333,7 @@
             + name.substring(idx + val.length);
           item.addEventListener('mousedown', function(e) {
             e.preventDefault();
-            var prev = input.getAttribute('data-selected');
-            if (prev) selectedNames.delete(prev);
             input.value = name;
-            input.setAttribute('data-selected', name);
-            selectedNames.add(name);
             dropdown.style.display = 'none';
             errorEl.textContent = '';
             input.classList.remove('invalid');
@@ -352,6 +355,10 @@
         setTimeout(function() {
           dropdown.style.display = 'none';
           validateField(self);
+          /* Clears a stale "already on this RSVP" error once the other row changes */
+          document.querySelectorAll('#guestList .autocomplete-wrap input.invalid').forEach(function(other) {
+            if (other !== self) validateField(other);
+          });
         }, 150);
       });
     }
@@ -372,13 +379,12 @@
         errorEl.textContent = "Please select a name from the guest list";
         return false;
       }
-      if (input.getAttribute('data-selected') !== match) {
-        var prev = input.getAttribute('data-selected');
-        if (prev) selectedNames.delete(prev);
-        input.value = match;
-        input.setAttribute('data-selected', match);
-        selectedNames.add(match);
+      if (isNameTaken(match, input)) {
+        input.classList.add('invalid');
+        errorEl.textContent = 'This guest is already on this RSVP';
+        return false;
       }
+      input.value = match;
       input.classList.remove('invalid');
       errorEl.textContent = '';
       return true;
@@ -432,9 +438,8 @@
       updateContinue();
 
       entry.querySelector('.btn-remove-guest').addEventListener('click', function() {
-        var selName = newInput.getAttribute('data-selected');
-        if (selName) selectedNames.delete(selName);
         entry.remove();
+        document.querySelectorAll('#guestList .autocomplete-wrap input.invalid').forEach(validateField);
         renumberGuests();
         updateContinue();
       });
@@ -484,10 +489,11 @@
 
     /* ── Continue visibility ── */
     function isGuestComplete(entry) {
-      var name = entry.querySelector('.autocomplete-wrap input[type="text"]').value.trim().toLowerCase();
+      var input = entry.querySelector('.autocomplete-wrap input[type="text"]');
+      var name = input.value.trim().toLowerCase();
       var onList = GUESTS.some(function(g) { return g.toLowerCase() === name; });
       var choice = entry.querySelector('.attendance input[type="radio"]:checked');
-      if (!onList || !choice) return false;
+      if (!onList || isNameTaken(name, input) || !choice) return false;
       return choice.value === 'Declines' || entry.querySelector('.entree-group select').value !== '';
     }
 
